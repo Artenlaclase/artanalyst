@@ -62,17 +62,56 @@ c:/proyectos/arteapp/
 
 ---
 
-## 3. Módulo de Análisis Visual Guiado (Método Panofsky)
+## 3. Módulo de Análisis Visual Guiado y Metodología (Panofsky & Wölfflin)
 
-| Nivel de Análisis | Pregunta Guía | Herramientas Interactivas en la App |
-| :--- | :--- | :--- |
-| **1. Descripción Formal (Pre-iconográfica)** | *¿Qué veo y cómo está construido?* | Capa de **Composición** (regla de tercios, diagonales de fuerza, razón áurea), capa de **Paleta Cromática** (extracción de tonos complementarios y armónicos), ejercicio de punto focal. |
-| **2. Análisis Iconográfico** | *¿Qué significa lo que veo?* | Herramienta de marcado de **Regiones de Interés (ROI)** para delimitar atributos, símbolos y personajes con notas analíticas. |
-| **3. Interpretación Iconológica** | *¿Qué nos dice la obra sobre su época?* | Reflexión sobre el contexto histórico, tensiones ideológicas y cosmovisión. Al guardar, se activa la **comparativa con la Respuesta Modelo curada** por historiadores. |
+ArtAnalyst integra el marco metodológico canónico de la historia del arte estructurado en **4 pasos**, complementado con el análisis formal del esquema óptico de **Heinrich Wölfflin**:
+
+```mermaid
+flowchart TD
+    P1["Paso 1: Descripción Pre-iconográfica y Análisis Formal<br/>(Motivos artísticos, significación fáctica/expresiva y 5 pares de Wölfflin)"] --> P2["Paso 2: Análisis Iconográfico<br/>(Temas, alegorías, personajes y consulta de fuentes textuales)"]
+    P2 --> P3["Paso 3: Interpretación Iconológica<br/>(Significación intrínseca, valores simbólicos e intuición sintética)"]
+    P3 --> P4["Paso 4: Verificación Histórica / Principios Correctivos<br/>(Historia del estilo, de los tipos y de los síntomas culturales)"]
+```
+
+### 3.1. Estructura de los 4 Pasos del Análisis
+
+1. **Paso 1: Descripción Pre-iconográfica y Análisis Formal** (*Panofsky, 1979; Wölfflin, 1915/2017*):
+   * **Motivos artísticos:** Identificación de formas puras (líneas, colores, volúmenes) que representan objetos, figuras humanas o paisajes.
+   * **Significación fáctica y expresiva:** Distinción entre las acciones observables cotidianas y la atmósfera o cualidad psicológica.
+   * **Esquema óptico de Heinrich Wölfflin (Los 5 pares de conceptos contrapuestos):**
+     * **Lo lineal frente a lo pictórico:** Contornos plásticos tangibles vs. manchas de luz, sombra y bordes esfumados.
+     * **Lo superficial frente a lo profundo:** Ordenación en franjas frontales paralelas vs. penetración espacial diagonal y escorzos.
+     * **Forma cerrada frente a forma abierta:** Composición tectónica simétrica autosuficiente vs. atectónica dinámica orientada hacia el exterior.
+     * **Pluralidad frente a unidad:** Cada componente mantiene su independencia formal vs. subordinación total a un motivo rector.
+     * **Claridad absoluta frente a claridad relativa (oscuridad):** Formas plenamente reveladas vs. claroscuros, penumbras y misterios ópticos.
+
+2. **Paso 2: Análisis Iconográfico** (*Panofsky, 1979*):
+   * **Significado secundario o convencional:** Vinculación de los motivos visuales con historias, mitos, relatos bíblicos y alegorías.
+   * **Consulta de fuentes:** Contrastación con textos literarios, teológicos, filosóficos o tradición oral conocida en la época.
+
+3. **Paso 3: Interpretación Iconológica** (*Panofsky, 1979*):
+   * **Significación intrínseca (Contenido):** Descubrimiento de los principios que revelan la mentalidad básica de una época, nación, clase social o religión, matizada por el artista.
+   * **Valores simbólicos:** La forma y el tema como síntomas de una cosmovisión cultural profunda.
+   * **Intuición sintética:** Integración articulada de formas, motivos y contexto en un discurso orgánico.
+
+4. **Paso 4: Verificación Histórica (Principios Correctivos)** (*Panofsky, 1979*):
+   * **Historia del estilo:** Corrige la descripción formal analizando cómo se configuraban las formas en cada época.
+   * **Historia de los tipos:** Corrige el análisis iconográfico verificando cómo temas y alegorías se representaban convencionalmente.
+   * **Historia de los síntomas culturales:** Corrige la interpretación iconológica confrontando la obra con la literatura y filosofía coetáneas para evitar el anacronismo.
 
 ---
 
-## 4. Módulo de Semáforo de Licencias Transparente
+## 4. Nueva Página de Estudio y Guía de la Aplicación (`/study`)
+
+La aplicación cuenta con una sección interactiva de formación accesible desde la barra de navegación principal:
+
+* 📚 **Pestaña 1: Metodología (Panofsky & Wölfflin):** Fichas didácticas exhaustivas con citas a *El significado en las artes visuales* (1979) y *Conceptos fundamentales de la historia del arte* (1915/2017), tarjetas desplegables para contrastar los 5 pares de Wölfflin y cuadro sinóptico de doble entrada.
+* 📱 **Pestaña 2: ¿Cómo Funciona la App?:** Recorrido interactivo por las herramientas (buscador con semáforo, visor de alta resolución, overlay de regla de tercios/diagonales, overlay de paleta de colores HEX y armonías, herramienta de dibujo de regiones ROI y stepper de Panofsky con respuestas modelo).
+* 🎯 **Pestaña 3: Taller y Autoevaluación:** Cuestionario formativo interactivo con retroalimentación inmediata sobre conceptos clave de Wölfflin y Panofsky.
+
+---
+
+## 5. Módulo de Semáforo de Licencias Transparente
 
 | Semáforo | Estado Legal | Comportamiento en ArtAnalyst |
 | :---: | :--- | :--- |

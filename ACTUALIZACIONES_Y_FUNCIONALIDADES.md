@@ -30,6 +30,18 @@ Este documento detalla el historial de cambios técnicos aplicados en el reposit
   * Respaldo a URLs de red con los anchos oficiales y cacheados de producción de Wikimedia (`500px` para miniaturas y `1280px` para alta definición).
   * Placeholder con gradiente cálido de museo, icono de paleta y barra de progreso porcentual que evita cuadros blancos parpadeantes durante la descarga.
 
+### 1.5. Incorporación de la Página de Estudio y Explicación Metodológica Integral
+* **Nueva Ruta y Vista de Estudio (`/study` - `StudyView`):** Se implementó una página interactiva completa con tres pestañas:
+  * **Metodología de Análisis Visual (Panofsky & Wölfflin):** Expone con rigor científico los 4 pasos del análisis, el esquema óptico de los 5 pares contrapuestos de Heinrich Wölfflin con acordeones comparativos, y el cuadro sinóptico de doble entrada de Erwin Panofsky, citando sus textos canónicos:
+    * *Panofsky, Erwin: El significado en las artes visuales (1979)*.
+    * *Wölfflin, Heinrich: Conceptos fundamentales de la historia del arte (1915/2017)*.
+  * **Guía de Funcionamiento de la Aplicación:** Explicación detallada del flujo completo (búsqueda con semáforo, visor de alta definición, superposición geométrica y cromática, marcado de ROI, redacción y contraste con respuesta modelo).
+  * **Taller y Autoevaluación:** Módulo interactivo con preguntas de opción múltiple y retroalimentación inmediata para asentar los conceptos.
+* **Acceso Directo y Navegación Bidireccional:**
+  * Se añadió el destino persistente `Estudio` en el `NavigationRail` (Web/Desktop) y `NavigationBar` (Móvil).
+  * Se incorporaron accesos directos desde la barra del catálogo y desde el visor de análisis (`AnalysisView` y `PanofskyStepper`).
+  * En el Nivel 1 del Stepper se incorporó una guía rápida de los 5 pares de Wölfflin, y al pie se añadió la referencia al Paso 4 de Verificación Histórica.
+
 ---
 
 ## 2. Catálogo de Funcionalidades Implementadas

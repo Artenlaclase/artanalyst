@@ -34,6 +34,11 @@ class AnalysisView extends StatelessWidget {
           },
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.auto_stories_rounded),
+            tooltip: 'Guía Metodológica y Explicación del Análisis',
+            onPressed: () => context.push('/study'),
+          ),
           BlocBuilder<AnalysisCubit, AnalysisState>(
             builder: (context, state) {
               if (state is AnalysisLoaded) {
@@ -123,9 +128,39 @@ class AnalysisView extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    loaded.artwork.artistName ?? 'Artista desconocido',
-                                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          loaded.artwork.artistName ?? 'Artista desconocido',
+                                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () => context.push('/study'),
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFF8B4513).withOpacity(0.08),
+                                            borderRadius: BorderRadius.circular(8),
+                                            border: Border.all(color: const Color(0xFF8B4513).withOpacity(0.25)),
+                                          ),
+                                          child: const Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(Icons.auto_stories_rounded, size: 14, color: Color(0xFF8B4513)),
+                                              SizedBox(width: 4),
+                                              Text(
+                                                'Guía Panofsky',
+                                                style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.bold, color: Color(0xFF8B4513)),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   const SizedBox(height: 4),
                                   Text(

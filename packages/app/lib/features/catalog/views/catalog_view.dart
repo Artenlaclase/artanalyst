@@ -22,6 +22,11 @@ class CatalogView extends StatelessWidget {
         ),
         actions: [
           IconButton(
+            tooltip: 'Guía Metodológica y Estudio de Arte',
+            icon: const Icon(Icons.auto_stories_rounded),
+            onPressed: () => context.go('/study'),
+          ),
+          IconButton(
             tooltip: 'Guía de Licencias y Derechos',
             icon: const Icon(Icons.help_outline_rounded),
             onPressed: () => context.go('/licenses-guide'),
@@ -128,6 +133,36 @@ class CatalogView extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+              ),
+
+              // Educational study banner
+              InkWell(
+                onTap: () => context.go('/study'),
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF8B4513).withOpacity(0.07),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: const Color(0xFF8B4513).withOpacity(0.2)),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.auto_stories_rounded, size: 20, color: Color(0xFF8B4513)),
+                      const SizedBox(width: 10),
+                      const Expanded(
+                        child: Text(
+                          '¿Cómo analizar una obra? Descubre el Método de Panofsky, los 5 pares de Wölfflin y el funcionamiento de la app.',
+                          style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w500, color: Color(0xFF5D2E0C)),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () => context.go('/study'),
+                        child: const Text('Abrir Estudio', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                      ),
+                    ],
+                  ),
                 ),
               ),
 

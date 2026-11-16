@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:art_analyst_shared/shared.dart';
 
-/// The Panofsky Stepper guides the student systematically through the 3 methodological levels.
+/// The Panofsky Stepper guides the student systematically through the methodological levels.
 class PanofskyStepper extends StatefulWidget {
   final List<AnalysisGuide> guides;
   final List<UserAnalysisProgress> initialProgress;
@@ -78,149 +79,252 @@ class _PanofskyStepperState extends State<PanofskyStepper> {
 
     final levels = [PanofskyLevel.formal, PanofskyLevel.iconographic, PanofskyLevel.iconological];
 
-    return Stepper(
-      type: StepperType.vertical,
-      currentStep: _currentStep,
-      onStepTapped: (step) => setState(() => _currentStep = step),
-      controlsBuilder: (context, details) => const SizedBox.shrink(),
-      steps: levels.map((level) {
-        final guide = widget.guides.cast<AnalysisGuide?>().firstWhere(
-              (g) => g?.level == level,
-              orElse: () => null,
-            );
-        final isCompleted = _completedSteps[level] ?? false;
-        final hasModelRevealed = _revealedModelAnswers[level] ?? false;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        // Stepper
+        Stepper(
+          type: StepperType.vertical,
+          currentStep: _currentStep,
+          onStepTapped: (step) => setState(() => _currentStep = step),
+          controlsBuilder: (context, details) => const SizedBox.shrink(),
+          steps: levels.map((level) {
+            final guide = widget.guides.cast<AnalysisGuide?>().firstWhere(
+                  (g) => g?.level == level,
+                  orElse: () => null,
+                );
+            final isCompleted = _completedSteps[level] ?? false;
+            final hasModelRevealed = _revealedModelAnswers[level] ?? false;
 
-        return Step(
-          isActive: _currentStep >= levels.indexOf(level),
-          state: isCompleted ? StepState.complete : StepState.indexed,
-          title: Text(
-            level.title,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-          ),
-          subtitle: Text(
-            level.questionPrompt,
-            style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
-          ),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 8),
-              // Guiding Question Prompt
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.06),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.2)),
-                ),
-                child: Text(
-                  guide?.prompt ?? level.questionPrompt,
-                  style: const TextStyle(fontSize: 13.5, height: 1.45, fontWeight: FontWeight.w500),
-                ),
+            return Step(
+              isActive: _currentStep >= levels.indexOf(level),
+              state: isCompleted ? StepState.complete : StepState.indexed,
+              title: Text(
+                level.title,
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               ),
-
-              // Pedagogical hints expansion
-              if (guide != null && guide.hints.isNotEmpty) ...[
-                const SizedBox(height: 8),
-                ExpansionTile(
-                  tilePadding: EdgeInsets.zero,
-                  title: const Row(
-                    children: [
-                      Icon(Icons.lightbulb_outline, size: 16, color: Colors.amber),
-                      SizedBox(width: 6),
-                      Text('Pistas para el análisis', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-                    ],
+              subtitle: Text(
+                level.questionPrompt,
+                style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+              ),
+              content: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 8),
+                  // Guiding Question Prompt
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary.withOpacity(0.06),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.2)),
+                    ),
+                    child: Text(
+                      guide?.prompt ?? level.questionPrompt,
+                      style: const TextStyle(fontSize: 13.5, height: 1.45, fontWeight: FontWeight.w500),
+                    ),
                   ),
-                  children: guide.hints.map((hint) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 20, bottom: 6),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+
+                  // Specialized Wölfflin 5 pairs assistant for Level 1 (Formal)
+                  if (level == PanofskyLevel.formal) ...[
+                    const SizedBox(height: 8),
+                    ExpansionTile(
+                      tilePadding: EdgeInsets.zero,
+                      leading: const Icon(Icons.compare_arrows_rounded, color: Color(0xFF1E88E5), size: 20),
+                      title: const Text(
+                        'Esquema óptico de Wölfflin (5 pares contrapuestos)',
+                        style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold, color: Color(0xFF1E88E5)),
+                      ),
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.blue.shade50.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: Colors.blue.shade200),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Aplica estos criterios para entender cómo se organiza la visión (Wölfflin, 1915/2017):',
+                                style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 6),
+                              Text('• 1. Lineal vs. Pictórico: contornos táctiles precisos frente a manchas ópticas y claroscuros.', style: TextStyle(fontSize: 11.5)),
+                              SizedBox(height: 4),
+                              Text('• 2. Superficial vs. Profundo: ordenación en planos frontales paralelos frente a penetración diagonal/escorzos.', style: TextStyle(fontSize: 11.5)),
+                              SizedBox(height: 4),
+                              Text('• 3. Forma cerrada vs. Forma abierta: composición tectónica simétrica frente a atectónica que alude al exterior.', style: TextStyle(fontSize: 11.5)),
+                              SizedBox(height: 4),
+                              Text('• 4. Pluralidad vs. Unidad: partes autónomas articuladas frente a subordinación a un motivo dominante.', style: TextStyle(fontSize: 11.5)),
+                              SizedBox(height: 4),
+                              Text('• 5. Claridad absoluta vs. Claridad relativa: visibilidad completa de formas frente a penumbra y enigmas.', style: TextStyle(fontSize: 11.5)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+
+                  // Pedagogical hints expansion
+                  if (guide != null && guide.hints.isNotEmpty) ...[
+                    const SizedBox(height: 8),
+                    ExpansionTile(
+                      tilePadding: EdgeInsets.zero,
+                      title: const Row(
                         children: [
-                          const Text('• ', style: TextStyle(fontWeight: FontWeight.bold)),
-                          Expanded(child: Text(hint, style: const TextStyle(fontSize: 12, height: 1.3))),
+                          Icon(Icons.lightbulb_outline, size: 16, color: Colors.amber),
+                          SizedBox(width: 6),
+                          Text('Pistas para el análisis', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
                         ],
                       ),
-                    );
-                  }).toList(),
-                ),
-              ],
+                      children: guide.hints.map((hint) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 20, bottom: 6),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('• ', style: TextStyle(fontWeight: FontWeight.bold)),
+                              Expanded(child: Text(hint, style: const TextStyle(fontSize: 12, height: 1.3))),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ],
 
-              const SizedBox(height: 12),
-              // Student Response Input
-              TextField(
-                controller: _controllers[level],
-                maxLines: 4,
-                decoration: InputDecoration(
-                  hintText: 'Redacta aquí tus observaciones analíticas...',
-                  hintStyle: const TextStyle(fontSize: 12.5),
-                  suffixIcon: IconButton(
-                    tooltip: 'Guardar borrador',
-                    icon: const Icon(Icons.save_as_outlined, size: 18),
-                    onPressed: () {
-                      final text = _controllers[level]?.text ?? '';
-                      widget.onSaveProgress(level, text, false);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Borrador guardado localmente.')),
-                      );
-                    },
+                  const SizedBox(height: 12),
+                  // Student Response Input
+                  TextField(
+                    controller: _controllers[level],
+                    maxLines: 4,
+                    decoration: InputDecoration(
+                      hintText: 'Redacta aquí tus observaciones analíticas...',
+                      hintStyle: const TextStyle(fontSize: 12.5),
+                      suffixIcon: IconButton(
+                        tooltip: 'Guardar borrador',
+                        icon: const Icon(Icons.save_as_outlined, size: 18),
+                        onPressed: () {
+                          final text = _controllers[level]?.text ?? '';
+                          widget.onSaveProgress(level, text, false);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Borrador guardado localmente.')),
+                          );
+                        },
+                      ),
+                    ),
                   ),
-                ),
-              ),
 
-              const SizedBox(height: 12),
-              Row(
-                children: [
-                  FilledButton.icon(
-                    onPressed: () => _handleSubmitCurrentStep(level),
-                    icon: Icon(hasModelRevealed ? Icons.refresh : Icons.check_circle_outline, size: 16),
-                    label: Text(hasModelRevealed ? 'Actualizar y comparar' : 'Comparar con respuesta modelo'),
-                  ),
-                ],
-              ),
-
-              // Model Answer Comparison Card
-              if (hasModelRevealed && guide != null) ...[
-                const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF2E7D32).withOpacity(0.08),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFF2E7D32).withOpacity(0.4)),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  const SizedBox(height: 12),
+                  Row(
                     children: [
-                      const Row(
+                      FilledButton.icon(
+                        onPressed: () => _handleSubmitCurrentStep(level),
+                        icon: Icon(hasModelRevealed ? Icons.refresh : Icons.check_circle_outline, size: 16),
+                        label: Text(hasModelRevealed ? 'Actualizar y comparar' : 'Comparar con respuesta modelo'),
+                      ),
+                    ],
+                  ),
+
+                  // Model Answer Comparison Card
+                  if (hasModelRevealed && guide != null) ...[
+                    const SizedBox(height: 16),
+                    Container(
+                      padding: const EdgeInsets.all(14),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF2E7D32).withOpacity(0.08),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: const Color(0xFF2E7D32).withOpacity(0.4)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.school_rounded, size: 18, color: Color(0xFF2E7D32)),
-                          SizedBox(width: 8),
+                          const Row(
+                            children: [
+                              Icon(Icons.school_rounded, size: 18, color: Color(0xFF2E7D32)),
+                              SizedBox(width: 8),
+                              Text(
+                                'Respuesta Modelo (Curada por el equipo pedagógico):',
+                                style: TextStyle(
+                                  color: Color(0xFF2E7D32),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.5,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
                           Text(
-                            'Respuesta Modelo (Curada por el equipo pedagógico):',
-                            style: TextStyle(
-                              color: Color(0xFF2E7D32),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12.5,
-                            ),
+                            guide.modelAnswer,
+                            style: const TextStyle(fontSize: 13, height: 1.45),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        guide.modelAnswer,
-                        style: const TextStyle(fontSize: 13, height: 1.45),
+                    ),
+                  ],
+                  const SizedBox(height: 16),
+                ],
+              ),
+            );
+          }).toList(),
+        ),
+
+        // PASO 4: VERIFICACIÓN HISTÓRICA / PRINCIPIOS CORRECTIVOS
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+          child: Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: Colors.green.shade50.withOpacity(0.7),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.green.shade300),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.verified_user_rounded, color: Colors.green.shade800, size: 20),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Paso 4: Verificación Histórica (Principios Correctivos)',
+                        style: TextStyle(
+                          fontSize: 13.5,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green.shade900,
+                        ),
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                const Text(
+                  'Para evitar desviaciones subjetivas y anacronismos (Panofsky, 1979):\n'
+                  '• Historia del estilo: evalúa cómo se expresaban las formas en la época.\n'
+                  '• Historia de los tipos: revisa cómo se representaban temas y alegorías.\n'
+                  '• Historia de síntomas culturales: contrasta la obra con la mentalidad y textos coetáneos.',
+                  style: TextStyle(fontSize: 12, height: 1.4),
+                ),
+                const SizedBox(height: 8),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton.icon(
+                    style: TextButton.styleFrom(
+                      foregroundColor: const Color(0xFF5D2E0C),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    ),
+                    onPressed: () => context.push('/study'),
+                    icon: const Icon(Icons.menu_book_rounded, size: 16),
+                    label: const Text('Ver Metodología Completa', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],
-              const SizedBox(height: 16),
-            ],
+            ),
           ),
-        );
-      }).toList(),
+        ),
+      ],
     );
   }
 }

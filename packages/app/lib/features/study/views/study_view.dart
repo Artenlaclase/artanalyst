@@ -360,7 +360,7 @@ class _StudyViewState extends State<StudyView> with SingleTickerProviderStateMix
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: DataTable(
-                        headingRowColor: MaterialStateProperty.all(Colors.brown.shade50),
+                        headingRowColor: WidgetStateProperty.all(Colors.brown.shade50),
                         columns: const [
                           DataColumn(label: Text('Nivel / Paso', style: TextStyle(fontWeight: FontWeight.bold))),
                           DataColumn(label: Text('Objeto de Interpretación', style: TextStyle(fontWeight: FontWeight.bold))),
