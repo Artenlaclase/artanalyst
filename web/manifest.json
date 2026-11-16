@@ -1,0 +1,11 @@
+{
+  "name": "ArtAnalyst",
+  "short_name": "ArtAnalyst",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#FAF8F5",
+  "theme_color": "#8B4513",
+  "description": "Herramienta pedagógica de análisis formal de arte y semáforo de licencias transparente.",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false
+}
