@@ -1,0 +1,13 @@
+name: art_analyst_catalog
+description: Microservicio de Catálogo y Análisis Visual Guiado (Panofsky) para ArtAnalyst
+version: 1.0.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  art_analyst_shared:
+    path: ../../shared
+
+dev_dependencies:
+  test: ^1.24.0
