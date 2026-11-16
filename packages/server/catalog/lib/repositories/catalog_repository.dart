@@ -31,8 +31,8 @@ class CatalogRepository {
       ArtworkImage(
         id: 'img-vg-01',
         artworkId: art1.id,
-        imageUrl: 'https://images.metmuseum.org/CRDImages/ep/original/DT1502_cropped2.jpg',
-        thumbnailUrl: 'https://images.metmuseum.org/CRDImages/ep/web-large/DT1502_cropped2.jpg',
+        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Van_Gogh_Self-Portrait_with_Straw_Hat_1887-Metropolitan.jpg',
+        thumbnailUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Van_Gogh_Self-Portrait_with_Straw_Hat_1887-Metropolitan.jpg',
         licenseType: LicenseType.cc0,
         licenseUri: 'https://creativecommons.org/publicdomain/zero/1.0/',
         attributionText: '"Autorretrato con sombrero de paja" por Vincent van Gogh. Colección: The Metropolitan Museum of Art (Open Access). Licencia: Dominio Público CC0.',
@@ -105,8 +105,8 @@ class CatalogRepository {
       ArtworkImage(
         id: 'img-monet-01',
         artworkId: art2.id,
-        imageUrl: 'https://openaccess-cdn.clevelandart.org/1915.534/1915.534_web.jpg',
-        thumbnailUrl: 'https://openaccess-cdn.clevelandart.org/1915.534/1915.534_thumb.jpg',
+        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/14/Claude_Monet_-_Water_Lilies_-_Google_Art_Project.jpg',
+        thumbnailUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/14/Claude_Monet_-_Water_Lilies_-_Google_Art_Project.jpg',
         licenseType: LicenseType.cc0,
         licenseUri: 'https://creativecommons.org/publicdomain/zero/1.0/',
         attributionText: '"Nenúfares" por Claude Monet. Cleveland Museum of Art (Open Access). Dominio Público CC0.',
