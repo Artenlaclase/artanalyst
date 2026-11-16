@@ -67,13 +67,24 @@ class CatalogView extends StatelessWidget {
                     // Search bar
                     TextField(
                       decoration: const InputDecoration(
-                        hintText: 'Buscar por obra, artista o época...',
+                        hintText: 'Buscar por obra, artista o museo (ej. Mona Lisa, Van Gogh)...',
                         prefixIcon: Icon(Icons.search),
                         isDense: true,
                       ),
                       onChanged: (val) => context.read<CatalogCubit>().search(val),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 6),
+                    Row(
+                      children: [
+                        Icon(Icons.visibility_outlined, size: 13, color: Colors.grey.shade600),
+                        const SizedBox(width: 6),
+                        Text(
+                          'Mostrando obras con reproducción digital disponible. Si buscas una obra protegida, te indicaremos dónde verla oficialmente.',
+                          style: TextStyle(fontSize: 11, color: Colors.grey.shade600, fontStyle: FontStyle.italic),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
                     // Traffic light filters
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,

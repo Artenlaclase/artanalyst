@@ -76,26 +76,51 @@ class ArtworkCard extends StatelessWidget {
                     )
                   else
                     Container(
-                      color: const Color(0xFF2B2020),
-                      padding: const EdgeInsets.all(16),
-                      child: const Column(
+                      color: const Color(0xFF261D1D),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.shield_outlined, size: 36, color: Color(0xFFE57373)),
-                          SizedBox(height: 8),
-                          Text(
-                            'Reproducción protegida',
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFC62828).withOpacity(0.18),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(Icons.shield_outlined, size: 28, color: Color(0xFFE57373)),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            'Derechos Reservados',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Color(0xFFFFCDD2),
-                              fontSize: 11.5,
+                              fontSize: 12,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Text(
-                            'Solo enlace a museo',
-                            style: TextStyle(color: Colors.white70, fontSize: 10),
+                            'Disponible para consultar en:\n${artwork.source.toUpperCase()}',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: Colors.white70, fontSize: 10.5, height: 1.3),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Colors.white12,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.white24),
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('Ver en web oficial', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                                SizedBox(width: 4),
+                                Icon(Icons.open_in_new_rounded, size: 10, color: Colors.white),
+                              ],
+                            ),
                           ),
                         ],
                       ),
