@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:art_analyst_app/core/utils/url_helper.dart';
 
 /// Displayed when an artwork has a RED license semaphore.
 /// Prohibits digital image redistribution while educating the user.
@@ -82,7 +83,11 @@ class CopyrightPlaceholder extends StatelessWidget {
                   icon: const Icon(Icons.open_in_browser_rounded),
                   label: const Text('Ver obra en la web del museo'),
                   onPressed: () {
-                    // Open browser
+                    openExternalUrl(
+                      context,
+                      officialSourceUrl!,
+                      title: '$title ($institution)',
+                    );
                   },
                 ),
             ],

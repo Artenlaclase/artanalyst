@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:art_analyst_shared/shared.dart';
+import 'package:art_analyst_app/core/utils/url_helper.dart';
 
 /// Educational dialog explaining intellectual property rights and digital reproduction rules.
 class LicenseEducationalDialog extends StatelessWidget {
@@ -185,7 +186,11 @@ class LicenseEducationalDialog extends StatelessWidget {
             icon: const Icon(Icons.open_in_new_rounded, size: 16),
             label: const Text('Ver en catálogo oficial'),
             onPressed: () {
-              // Can launch URL
+              openExternalUrl(
+                context,
+                officialSourceUrl!,
+                title: institutionName ?? 'Catálogo Oficial',
+              );
             },
           ),
         FilledButton(

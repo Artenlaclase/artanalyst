@@ -5,10 +5,12 @@ import 'package:art_analyst_shared/shared.dart';
 class ArtworkRepository {
   final String catalogBaseUrl;
   final String licensingBaseUrl;
+  final bool enableRemoteBackend;
 
   ArtworkRepository({
     this.catalogBaseUrl = 'http://localhost:8080',
     this.licensingBaseUrl = 'http://localhost:8081',
+    this.enableRemoteBackend = false,
   });
 
   // Built-in fallback dataset with CORS-friendly URLs guaranteeing flawless rendering
@@ -152,14 +154,16 @@ class ArtworkRepository {
   };
 
   Future<List<Artwork>> fetchArtworks() async {
-    try {
-      final res = await http.get(Uri.parse('$catalogBaseUrl/api/v1/artworks')).timeout(const Duration(milliseconds: 800));
-      if (res.statusCode == 200) {
-        final data = jsonDecode(res.body) as Map<String, dynamic>;
-        final list = data['artworks'] as List<dynamic>;
-        return list.map((a) => Artwork.fromJson(a as Map<String, dynamic>)).toList();
-      }
-    } catch (_) {}
+    if (enableRemoteBackend) {
+      try {
+        final res = await http.get(Uri.parse('$catalogBaseUrl/api/v1/artworks')).timeout(const Duration(milliseconds: 800));
+        if (res.statusCode == 200) {
+          final data = jsonDecode(res.body) as Map<String, dynamic>;
+          final list = data['artworks'] as List<dynamic>;
+          return list.map((a) => Artwork.fromJson(a as Map<String, dynamic>)).toList();
+        }
+      } catch (_) {}
+    }
     return _mockArtworks;
   }
 
@@ -168,14 +172,16 @@ class ArtworkRepository {
   }
 
   Future<List<AnalysisGuide>> fetchGuides(String artworkId) async {
-    try {
-      final res = await http.get(Uri.parse('$catalogBaseUrl/api/v1/artworks/$artworkId/guides')).timeout(const Duration(milliseconds: 800));
-      if (res.statusCode == 200) {
-        final data = jsonDecode(res.body) as Map<String, dynamic>;
-        final list = data['guides'] as List<dynamic>;
-        return list.map((g) => AnalysisGuide.fromJson(g as Map<String, dynamic>)).toList();
-      }
-    } catch (_) {}
+    if (enableRemoteBackend) {
+      try {
+        final res = await http.get(Uri.parse('$catalogBaseUrl/api/v1/artworks/$artworkId/guides')).timeout(const Duration(milliseconds: 800));
+        if (res.statusCode == 200) {
+          final data = jsonDecode(res.body) as Map<String, dynamic>;
+          final list = data['guides'] as List<dynamic>;
+          return list.map((g) => AnalysisGuide.fromJson(g as Map<String, dynamic>)).toList();
+        }
+      } catch (_) {}
+    }
 
     return [
       AnalysisGuide(
@@ -213,12 +219,14 @@ class ArtworkRepository {
   }
 
   Future<void> saveProgress(UserAnalysisProgress progress) async {
-    try {
-      await http.post(
-        Uri.parse('$catalogBaseUrl/api/v1/users/${progress.userId}/progress'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(progress.toJson()),
-      ).timeout(const Duration(milliseconds: 800));
-    } catch (_) {}
+    if (enableRemoteBackend) {
+      try {
+        await http.post(
+          Uri.parse('$catalogBaseUrl/api/v1/users/${progress.userId}/progress'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode(progress.toJson()),
+        ).timeout(const Duration(milliseconds: 800));
+      } catch (_) {}
+    }
   }
 }
