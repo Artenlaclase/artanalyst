@@ -1,0 +1,20 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "art_analyst_shared",
+      "rootUri": "../../../shared",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "art_analyst_licensing",
+      "rootUri": "../",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    }
+  ],
+  "generated": "2026-11-15T00:00:00.000000Z",
+  "generator": "pub",
+  "generatorVersion": "3.10.8"
+}
