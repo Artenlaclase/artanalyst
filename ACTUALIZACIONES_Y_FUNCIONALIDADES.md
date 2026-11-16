@@ -23,6 +23,13 @@ Este documento detalla el historial de cambios técnicos aplicados en el reposit
 * **Actualización para Flutter 3.24+:** En `app_theme.dart` se actualizó la propiedad `cardTheme` de `CardTheme(...)` a `CardThemeData(...)`, asegurando compatibilidad estricta con las versiones más recientes del SDK de Flutter.
 * **Suite de Pruebas Automatizada:** Se implementó `scripts/run_all_tests.dart`, que compila y ejecuta 19 pruebas unitarias y de integración que validan el 100% de la lógica de licencias, adaptadores y repositorios.
 
+### 1.4. Optimización de Rendimiento de Imágenes y Carga Instantánea
+* **Causa de la Demora Inicial:** Wikimedia Commons implementó una política estricta de generación de miniaturas (`https://w.wiki/GHai`), rechazando con `HTTP 400` y demorando la generación al vuelo de anchos arbitrarios como `600px`. Además, la obra de Vermeer (*La joven de la perla*) posee un archivo maestro de más de 45 MB, lo que provocaba latencias de red y bloqueos temporales.
+* **Creación de `SmartArtworkImage`:** Se desarrolló un widget inteligente (`packages/app/lib/core/widgets/smart_artwork_image.dart`) que integra:
+  * Prioridad a **activos locales pre-empaquetados** (`assets/images/van_gogh.jpg`, `monet.jpg`, `vermeer.jpg`, `friedrich.jpg`), logrando una carga **inmediata a 0 ms** sin depender de internet ni sufrir bloqueos CORS.
+  * Respaldo a URLs de red con los anchos oficiales y cacheados de producción de Wikimedia (`500px` para miniaturas y `1280px` para alta definición).
+  * Placeholder con gradiente cálido de museo, icono de paleta y barra de progreso porcentual que evita cuadros blancos parpadeantes durante la descarga.
+
 ---
 
 ## 2. Catálogo de Funcionalidades Implementadas
