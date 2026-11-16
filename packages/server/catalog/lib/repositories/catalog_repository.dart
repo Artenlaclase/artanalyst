@@ -28,7 +28,7 @@ class CatalogRepository {
     );
     _artworks[art1.id] = art1;
     _images[art1.id] = [
-      const ArtworkImage(
+      ArtworkImage(
         id: 'img-vg-01',
         artworkId: art1.id,
         imageUrl: 'https://images.metmuseum.org/CRDImages/ep/original/DT1502_cropped2.jpg',
@@ -43,41 +43,41 @@ class CatalogRepository {
       )
     ];
     _guides[art1.id] = [
-      const AnalysisGuide(
+      AnalysisGuide(
         id: 'guide-vg-01',
         artworkId: art1.id,
         level: PanofskyLevel.formal,
         prompt: '1. Nivel Formal: Observa la dirección de las pinceladas y la relación cromática entre el sombrero y el fondo. ¿Qué efecto óptico genera el uso de colores complementarios?',
         modelAnswer: 'Van Gogh yuxtapone amarillos y anaranjados brillantes en el sombrero frente al azul violáceo y verde del fondo. Las pinceladas rítmicas y radiales emanan del rostro hacia afuera, creando un dinamismo centrífugo que focaliza la tensión en los ojos penetrantes del pintor.',
-        hints: [
+        hints: const [
           'Presta atención a la rueda de colores: el azul y el naranja son complementarios.',
           'Nota cómo los trazos de óleo tienen textura matérica visible (empaste).'
         ],
         exerciseType: InteractiveExerciseType.focalPointSelect,
-        exerciseConfig: {'targetX': 0.50, 'targetY': 0.42, 'tolerance': 0.15},
+        exerciseConfig: const {'targetX': 0.50, 'targetY': 0.42, 'tolerance': 0.15},
         orderIndex: 1,
       ),
-      const AnalysisGuide(
+      AnalysisGuide(
         id: 'guide-vg-02',
         artworkId: art1.id,
         level: PanofskyLevel.iconographic,
         prompt: '2. Nivel Iconográfico: Identifica los atributos personales del retratado (el sombrero de paja, la camisa campesina). ¿Qué mensaje simbólico comunica esta elección indumentaria?',
         modelAnswer: 'El sombrero de paja y la vestimenta rústica vinculan a Van Gogh con los campesinos y labradores, a quienes consideraba portadores de una dignidad moral superior frente a la burguesía urbana académica.',
-        hints: [
+        hints: const [
           '¿Cómo solían vestir los pintores académicos de la época en sus autorretratos oficiales?',
           'Recuerda las obras tempranas de Van Gogh en Nuenen, como "Los comedores de patatas".'
         ],
         exerciseType: InteractiveExerciseType.regionAnnotationTag,
-        exerciseConfig: {'requiredCategory': 'symbol'},
+        exerciseConfig: const {'requiredCategory': 'symbol'},
         orderIndex: 2,
       ),
-      const AnalysisGuide(
+      AnalysisGuide(
         id: 'guide-vg-03',
         artworkId: art1.id,
         level: PanofskyLevel.iconological,
         prompt: '3. Nivel Iconológico: ¿Qué manifiesta esta obra sobre la transición de la pintura occidental a finales del siglo XIX hacia la subjetividad y la vanguardia?',
         modelAnswer: 'Marca la superación del Naturalismo e Impresionismo documental: el arte ya no busca reflejar la apariencia externa de las cosas, sino exteriorizar el estado psíquico y espiritual del creador, anticipando el Expresionismo del siglo XX.',
-        hints: [
+        hints: const [
           'Reflexiona sobre el aislamiento social del artista en la gran ciudad moderna.',
           'Considera cómo el color adquiere un valor emocional autónomo.'
         ],
@@ -102,7 +102,7 @@ class CatalogRepository {
     );
     _artworks[art2.id] = art2;
     _images[art2.id] = [
-      const ArtworkImage(
+      ArtworkImage(
         id: 'img-monet-01',
         artworkId: art2.id,
         imageUrl: 'https://openaccess-cdn.clevelandart.org/1915.534/1915.534_web.jpg',
@@ -117,33 +117,33 @@ class CatalogRepository {
       )
     ];
     _guides[art2.id] = [
-      const AnalysisGuide(
+      AnalysisGuide(
         id: 'guide-monet-01',
         artworkId: art2.id,
         level: PanofskyLevel.formal,
         prompt: '1. Nivel Formal: Examina la ausencia de horizonte y la relación entre masa y vacío cromático. ¿Cómo estructura Monet el espacio pictórico?',
         modelAnswer: 'Al suprimir la línea de tierra y de cielo, el lienzo se convierte en un continuo bidimensional donde agua y reflejo se confunden. La pincelada gestual y amplia genera una vibración atmosférica sin punto de fuga euclidiano.',
-        hints: ['Busca dónde termina el agua y dónde empieza la orilla: ¿existe esa división?'],
+        hints: const ['Busca dónde termina el agua y dónde empieza la orilla: ¿existe esa división?'],
         exerciseType: InteractiveExerciseType.colorPaletteInspect,
         orderIndex: 1,
       ),
-      const AnalysisGuide(
+      AnalysisGuide(
         id: 'guide-monet-02',
         artworkId: art2.id,
         level: PanofskyLevel.iconographic,
         prompt: '2. Nivel Iconográfico: ¿Qué papel juegan el nenúfar y el sauce llorón reflejado como motivos poéticos?',
         modelAnswer: 'Los nenúfares flotantes representan puntos de anclaje visual y reposo, mientras que las ramas invisibles del sauce que solo vemos en su reflejo evocan la melancolía y el duelo de la Primera Guerra Mundial.',
-        hints: ['Considera los años de creación: 1914-1918 en plena Gran Guerra.'],
+        hints: const ['Considera los años de creación: 1914-1918 en plena Gran Guerra.'],
         exerciseType: InteractiveExerciseType.regionAnnotationTag,
         orderIndex: 2,
       ),
-      const AnalysisGuide(
+      AnalysisGuide(
         id: 'guide-monet-03',
         artworkId: art2.id,
         level: PanofskyLevel.iconological,
         prompt: '3. Nivel Iconológico: ¿De qué manera esta serie anticipa el Expresionismo Abstracto (Pollock, Rothko) de mediados del siglo XX?',
         modelAnswer: 'La pintura "all-over" (todo el lienzo cubierto sin jerarquía de centro ni bordes) y la escala monumental transforman el cuadro en un entorno inmersivo donde el espectador ya no contempla desde afuera, sino que habita el espacio pictórico.',
-        hints: ['Compara el tratamiento con los grandes murales del Expresionismo Abstracto neoyorquino.'],
+        hints: const ['Compara el tratamiento con los grandes murales del Expresionismo Abstracto neoyorquino.'],
         exerciseType: InteractiveExerciseType.openReflection,
         orderIndex: 3,
       ),
@@ -165,7 +165,7 @@ class CatalogRepository {
     );
     _artworks[art3.id] = art3;
     _images[art3.id] = [
-      const ArtworkImage(
+      ArtworkImage(
         id: 'img-vermeer-01',
         artworkId: art3.id,
         imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/1665_Girl_with_a_Pearl_Earring.jpg',
@@ -180,34 +180,34 @@ class CatalogRepository {
       )
     ];
     _guides[art3.id] = [
-      const AnalysisGuide(
+      AnalysisGuide(
         id: 'guide-vermeer-01',
         artworkId: art3.id,
         level: PanofskyLevel.formal,
         prompt: '1. Nivel Formal: Observa el contraste de luz (claroscuro) y la técnica del reflejo en la perla y los labios húmedos.',
         modelAnswer: 'Vermeer crea la perla con apenas dos pinceladas: un toque de empaste blanco en la parte superior donde incide la luz directa de la izquierda, y un reflejo suave en la base inferior que recoge la luz reflejada del cuello blanco.',
-        hints: ['Haz zoom sobre el pendiente: ¿está completamente delineado o sugerido por toques de luz?'],
+        hints: const ['Haz zoom sobre el pendiente: ¿está completamente delineado o sugerido por toques de luz?'],
         exerciseType: InteractiveExerciseType.focalPointSelect,
-        exerciseConfig: {'targetX': 0.48, 'targetY': 0.58, 'tolerance': 0.12},
+        exerciseConfig: const {'targetX': 0.48, 'targetY': 0.58, 'tolerance': 0.12},
         orderIndex: 1,
       ),
-      const AnalysisGuide(
+      AnalysisGuide(
         id: 'guide-vermeer-02',
         artworkId: art3.id,
         level: PanofskyLevel.iconographic,
         prompt: '2. Nivel Iconográfico: ¿Es este cuadro un retrato o un "tronie"? ¿Qué simbolismo aporta el turbante oriental y la perla?',
         modelAnswer: 'No es un retrato formal de encargo sino un "tronie", un estudio de fisonomía y ropaje exótico. La perla en el siglo XVII holandés simbolizaba tanto la pureza femenina como el refinamiento y la riqueza mercantil.',
-        hints: ['En el siglo XVII Delft era un centro cosmopolita conectado con la Compañía Holandesa de las Indias Orientales.'],
+        hints: const ['En el siglo XVII Delft era un centro cosmopolita conectado con la Compañía Holandesa de las Indias Orientales.'],
         exerciseType: InteractiveExerciseType.regionAnnotationTag,
         orderIndex: 2,
       ),
-      const AnalysisGuide(
+      AnalysisGuide(
         id: 'guide-vermeer-03',
         artworkId: art3.id,
         level: PanofskyLevel.iconological,
         prompt: '3. Nivel Iconológico: ¿Qué nos enseña sobre la sociedad burguesa de la Edad de Oro holandesa y su comercio global?',
         modelAnswer: 'A diferencia del arte monárquico o católico de Francia o España, el arte holandés se orienta al coleccionismo privado burgués. El turbante de seda y el azul de ultramar (lapis lázuli afgano) atestiguan las rutas globales de comercio que convirtieron a la República Holandesa en potencia comercial.',
-        hints: ['El pigmento azul de ultramar era más costoso que el oro en esa época.'],
+        hints: const ['El pigmento azul de ultramar era más costoso que el oro en esa época.'],
         exerciseType: InteractiveExerciseType.openReflection,
         orderIndex: 3,
       ),
@@ -229,7 +229,7 @@ class CatalogRepository {
     );
     _artworks[art4.id] = art4;
     _images[art4.id] = [
-      const ArtworkImage(
+      ArtworkImage(
         id: 'img-mona-01',
         artworkId: art4.id,
         imageUrl: null, // Protegido: la app NO aloja ni muestra imágenes con semáforo Rojo
@@ -242,33 +242,33 @@ class CatalogRepository {
       )
     ];
     _guides[art4.id] = [
-      const AnalysisGuide(
+      AnalysisGuide(
         id: 'guide-mona-01',
         artworkId: art4.id,
         level: PanofskyLevel.formal,
         prompt: '1. Nivel Formal: Explica la técnica del sfumato y la composición piramidal renacentista.',
         modelAnswer: 'Leonardo difumina los contornos mediante capas veladas y translúcidas de óleo, eliminando las líneas duras especialmente en las comisuras de los ojos y la boca, generando una transición imperceptible entre luz y sombra.',
-        hints: ['Sfumato proviene de "fumo" (humo en italiano).'],
+        hints: const ['Sfumato proviene de "fumo" (humo en italiano).'],
         exerciseType: InteractiveExerciseType.openReflection,
         orderIndex: 1,
       ),
-      const AnalysisGuide(
+      AnalysisGuide(
         id: 'guide-mona-02',
         artworkId: art4.id,
         level: PanofskyLevel.iconographic,
         prompt: '2. Nivel Iconográfico: Analiza el velo (guarnello) y el paisaje primordial de fondo sin presencia humana visible.',
         modelAnswer: 'El sutil velo de gasa que cubre su cabello era característico de las mujeres embarazadas o recién dadas a luz en la Florencia del Cinquecento. El paisaje geológico de puentes y rocas conecta el cuerpo humano (microcosmos) con la naturaleza viva de la Tierra (macrocosmos).',
-        hints: ['Investiga el concepto de microcosmos y macrocosmos en los tratados de anatomía de Leonardo.'],
+        hints: const ['Investiga el concepto de microcosmos y macrocosmos en los tratados de anatomía de Leonardo.'],
         exerciseType: InteractiveExerciseType.openReflection,
         orderIndex: 2,
       ),
-      const AnalysisGuide(
+      AnalysisGuide(
         id: 'guide-mona-03',
         artworkId: art4.id,
         level: PanofskyLevel.iconological,
         prompt: '3. Nivel Iconológico: ¿Cómo representa la Mona Lisa el ideal humanista del Alto Renacimiento italiano?',
         modelAnswer: 'Consagra la confianza renacentista en la razón, la observación empírica de la naturaleza y la dignidad humana. El retrato trasciende la mera efigie nobiliaria para convertirse en arquetipo de la psique humana universal.',
-        hints: ['Compara con el humanismo de Marsilio Ficino y la corte de los Médici.'],
+        hints: const ['Compara con el humanismo de Marsilio Ficino y la corte de los Médici.'],
         exerciseType: InteractiveExerciseType.openReflection,
         orderIndex: 3,
       ),

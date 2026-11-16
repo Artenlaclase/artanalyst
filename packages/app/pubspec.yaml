@@ -1,0 +1,24 @@
+name: art_analyst_app
+description: ArtAnalyst - Aplicación educativa multiplataforma de análisis visual formal y semáforo de licencias
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  art_analyst_shared:
+    path: ../shared
+  flutter_bloc: ^8.1.3
+  go_router: ^14.0.0
+  http: ^1.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true

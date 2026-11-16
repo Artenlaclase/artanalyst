@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # 1. Base de datos PostgreSQL para Catálogo, Análisis y Progreso
+  postgres:
+    image: postgres:16-alpine
+    container_name: artanalyst_postgres
+    environment:
+      POSTGRES_USER: artanalyst
+      POSTGRES_PASSWORD: artanalyst_secret_password
+      POSTGRES_DB: artanalyst_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U artanalyst -d artanalyst_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 2. Redis para caché de resoluciones de licencias y metadatos frecuentes
+  redis:
+    image: redis:7-alpine
+    container_name: artanalyst_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 3. Microservicio de Medios y Licencias (Dart Frog / Shelf)
+  licensing-service:
+    build:
+      context: .
+      dockerfile: ./packages/server/licensing/Dockerfile
+    container_name: artanalyst_licensing
+    environment:
+      PORT: 8081
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # 4. Microservicio de Catálogo y Análisis (Serverpod / Dart)
+  catalog-service:
+    build:
+      context: .
+      dockerfile: ./packages/server/catalog/Dockerfile
+    container_name: artanalyst_catalog
+    environment:
+      PORT: 8080
+      DATABASE_URL: postgres://artanalyst:artanalyst_secret_password@postgres:5432/artanalyst_db
+      LICENSING_SERVICE_URL: http://licensing-service:8081
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  redis_data:
