@@ -36,3 +36,4 @@ build/
 # Docker volumes
 postgres_data/
 redis_data/
+ACTUALIZACIONES_Y_FUNCIONALIDADES.md
