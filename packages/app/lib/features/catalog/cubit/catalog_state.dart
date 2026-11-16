@@ -28,19 +28,32 @@ class CatalogLoaded extends CatalogState {
   });
 
   List<Artwork> get filteredArtworks {
+    final isSearching = searchQuery.trim().isNotEmpty;
+    final explicitlyFilteredRed = filterSemaphore == LicenseSemaphore.red;
+
     return artworks.where((a) {
+      final img = primaryImages[a.id];
+
+      // En la pantalla de inicio (sin búsqueda ni filtro rojo explícito):
+      // Solo mostrar obras que se pueden ver en la app (con imagen digital autorizada)
+      if (!isSearching && !explicitlyFilteredRed && filterSemaphore == null) {
+        if (img?.semaphoreColor == LicenseSemaphore.red) {
+          return false;
+        }
+      }
+
       if (filterSource != null && filterSource!.isNotEmpty && a.source != filterSource) {
         return false;
       }
       if (filterSemaphore != null) {
-        final img = primaryImages[a.id];
         if (img?.semaphoreColor != filterSemaphore) return false;
       }
-      if (searchQuery.isNotEmpty) {
-        final q = searchQuery.toLowerCase();
+      if (isSearching) {
+        final q = searchQuery.toLowerCase().trim();
         final matchTitle = a.title.toLowerCase().contains(q);
         final matchArtist = (a.artistName ?? '').toLowerCase().contains(q);
-        if (!matchTitle && !matchArtist) return false;
+        final matchSource = a.source.toLowerCase().contains(q);
+        if (!matchTitle && !matchArtist && !matchSource) return false;
       }
       return true;
     }).toList();
