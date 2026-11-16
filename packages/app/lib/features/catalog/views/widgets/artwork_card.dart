@@ -40,8 +40,38 @@ class ArtworkCard extends StatelessWidget {
                       image!.thumbnailUrl ?? image!.imageUrl!,
                       fit: BoxFit.cover,
                       errorBuilder: (ctx, err, st) => Container(
-                        color: Colors.grey.shade200,
-                        child: const Icon(Icons.broken_image, size: 36, color: Colors.grey),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              const Color(0xFF8B4513).withOpacity(0.85),
+                              const Color(0xFF3E2723),
+                            ],
+                          ),
+                        ),
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.palette_rounded, size: 36, color: Colors.amberAccent),
+                            const SizedBox(height: 8),
+                            Text(
+                              artwork.title,
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              artwork.artistName ?? '',
+                              textAlign: TextAlign.center,
+                              maxLines: 1,
+                              style: const TextStyle(color: Colors.white70, fontSize: 10),
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   else

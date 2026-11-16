@@ -176,14 +176,43 @@ class _AnnotatedViewerState extends State<AnnotatedViewer> {
                             );
                           },
                           errorBuilder: (context, error, stackTrace) => Container(
-                            color: Colors.grey.shade200,
-                            child: const Center(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Color(0xFF4E342E), Color(0xFF2E1C14)],
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(24),
+                            child: Center(
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(Icons.broken_image_rounded, size: 48, color: Colors.grey),
-                                  SizedBox(height: 8),
-                                  Text('Cargando reproducción digital...'),
+                                  const Icon(Icons.art_track_rounded, size: 56, color: Colors.amberAccent),
+                                  const SizedBox(height: 16),
+                                  Text(
+                                    widget.artwork.title,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    '${widget.artwork.artistName ?? ''} • ${widget.artwork.dateDisplay ?? ''}',
+                                    style: const TextStyle(color: Colors.white70, fontSize: 13),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white12,
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(color: Colors.white24),
+                                    ),
+                                    child: const Text(
+                                      'Lienzo activo: puedes aplicar capas de composición y anotar',
+                                      style: TextStyle(color: Colors.amberAccent, fontSize: 12),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),

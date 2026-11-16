@@ -73,6 +73,8 @@ class ScaffoldWithNavigation extends StatelessWidget {
   void _onItemTapped(int index, BuildContext context) {
     switch (index) {
       case 0:
+        context.read<CatalogCubit>().filterBySemaphore(null);
+        context.read<CatalogCubit>().search('');
         context.go('/catalog');
         break;
       case 1:

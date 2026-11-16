@@ -213,6 +213,66 @@ class CatalogRepository {
       ),
     ];
 
+    // 4. Caspar David Friedrich - El caminante sobre el mar de nubes (Amarillo CC BY-SA)
+    const art5 = Artwork(
+      id: 'a5000000-0000-0000-0000-000000000005',
+      externalId: 'friedrich-wanderer',
+      source: 'partner_museum',
+      title: 'El caminante sobre el mar de nubes',
+      artistName: 'Caspar David Friedrich',
+      dateDisplay: '1818',
+      medium: 'Óleo sobre lienzo',
+      dimensions: '94.8 x 74.8 cm',
+      description: 'Obra cumbre del Romanticismo pictórico alemán. Representa la figura de espaldas frente a la inmensidad de la niebla.',
+      officialUrl: 'https://online-sammlung.hamburger-kunsthalle.de/de/objekt/HK-5161',
+      department: 'Romanticismo',
+    );
+    _artworks[art5.id] = art5;
+    _images[art5.id] = [
+      ArtworkImage(
+        id: 'img-friedrich-01',
+        artworkId: art5.id,
+        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpg/800px-Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpg',
+        thumbnailUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpg/400px-Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpg',
+        licenseType: LicenseType.ccBySa,
+        licenseUri: 'https://creativecommons.org/licenses/by-sa/4.0/',
+        attributionText: '"El caminante sobre el mar de nubes" por Caspar David Friedrich. Hamburger Kunsthalle / CC BY-SA 4.0.',
+        isWorldwide: true,
+        semaphoreColor: LicenseSemaphore.yellow,
+        width: 1900,
+        height: 2400,
+      )
+    ];
+    _guides[art5.id] = [
+      AnalysisGuide(
+        id: 'guide-friedrich-01',
+        artworkId: art5.id,
+        level: PanofskyLevel.formal,
+        prompt: '1. Nivel Formal: Analiza la simetría axial y el contraste entre el primer plano oscuro y las capas de niebla luminosa.',
+        modelAnswer: 'La figura masculina erguida divide verticalmente el lienzo de forma casi simétrica. La silueta a contraluz funciona como repoussoir óptico, guiando la mirada hacia la lejanía atmosférica de los riscos montañosos.',
+        hints: const ['Observa la posición del caminante respecto al eje central', 'Fíjate en la atmósfera de bruma'],
+        orderIndex: 1,
+      ),
+      AnalysisGuide(
+        id: 'guide-friedrich-02',
+        artworkId: art5.id,
+        level: PanofskyLevel.iconographic,
+        prompt: '2. Nivel Iconográfico: ¿Qué función estética y simbólica cumple la figura de espaldas (Rückenfigur)?',
+        modelAnswer: 'La figura de espaldas invita al espectador a identificarse con su mirada, convirtiéndose en intermediario entre el observador y el misterio del paisaje infinito.',
+        hints: const ['Rückenfigur significa literalmente figura de espaldas en alemán'],
+        orderIndex: 2,
+      ),
+      AnalysisGuide(
+        id: 'guide-friedrich-03',
+        artworkId: art5.id,
+        level: PanofskyLevel.iconological,
+        prompt: '3. Nivel Iconológico: ¿Cómo encarna esta obra la categoría estética de "lo sublime" en el Romanticismo?',
+        modelAnswer: 'Encarna lo sublime de Kant y Burke: el sentimiento mezcla de asombro, reverencia y temor reverencial ante la inmensidad inconmensurable de la Creación y la pequeñez del ser humano.',
+        hints: const ['Revisa el concepto de lo sublime frente a lo meramente bello'],
+        orderIndex: 3,
+      ),
+    ];
+
     // 4. Leonardo da Vinci - Mona Lisa (Musée du Louvre - RED Semáforo)
     const art4 = Artwork(
       id: 'a4000000-0000-0000-0000-000000000004',

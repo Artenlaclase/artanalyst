@@ -20,7 +20,13 @@ void main() {
 
   // 1. Obtener todas las obras
   final artworks = repo.getAllArtworks();
-  test('El catálogo contiene 4 obras semilla iniciales', artworks.length == 4);
+  test('El catálogo contiene 5 obras semilla iniciales', artworks.length == 5);
+
+  // Verificar semáforo amarillo (CC BY-SA)
+  final friedrich = artworks.firstWhere((a) => a.source == 'partner_museum');
+  final friedrichImages = repo.getArtworkImages(friedrich.id);
+  test('Caspar David Friedrich tiene semáforo AMARILLO (CC BY-SA)',
+    friedrichImages.isNotEmpty && friedrichImages.first.semaphoreColor == LicenseSemaphore.yellow);
 
   // 2. Verificar semáforo rojo en Mona Lisa
   final monaLisa = artworks.firstWhere((a) => a.source == 'louvre');

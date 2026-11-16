@@ -123,7 +123,63 @@ class CatalogView extends StatelessWidget {
               // Artworks Grid
               Expanded(
                 child: artworks.isEmpty
-                    ? const Center(child: Text('No se encontraron obras con los filtros seleccionados.'))
+                    ? Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: (loaded.filterSemaphore != null)
+                                      ? (loaded.filterSemaphore == LicenseSemaphore.yellow
+                                          ? const Color(0xFFEF6C00).withOpacity(0.12)
+                                          : loaded.filterSemaphore == LicenseSemaphore.green
+                                              ? const Color(0xFF2E7D32).withOpacity(0.12)
+                                              : const Color(0xFFC62828).withOpacity(0.12))
+                                      : Colors.grey.withOpacity(0.12),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.filter_alt_off_rounded,
+                                  size: 48,
+                                  color: loaded.filterSemaphore != null
+                                      ? (loaded.filterSemaphore == LicenseSemaphore.yellow
+                                          ? const Color(0xFFEF6C00)
+                                          : loaded.filterSemaphore == LicenseSemaphore.green
+                                              ? const Color(0xFF2E7D32)
+                                              : const Color(0xFFC62828))
+                                      : Colors.grey,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                loaded.filterSemaphore != null
+                                    ? 'Filtro activo: "${loaded.filterSemaphore!.label}"'
+                                    : 'No se encontraron obras con los criterios actuales.',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(height: 8),
+                              const Text(
+                                'Puedes pulsar el botón para volver a ver todas las obras del catálogo:',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 13, color: Colors.grey),
+                              ),
+                              const SizedBox(height: 20),
+                              FilledButton.icon(
+                                icon: const Icon(Icons.refresh_rounded),
+                                label: const Text('Restablecer filtros y ver todas las obras'),
+                                onPressed: () {
+                                  context.read<CatalogCubit>().filterBySemaphore(null);
+                                  context.read<CatalogCubit>().search('');
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
                     : LayoutBuilder(
                         builder: (context, constraints) {
                           // Adaptive columns: 1 for mobile, 2 for tablet, 3-4 for desktop/web
