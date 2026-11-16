@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../features/catalog/views/catalog_view.dart';
-import '../../features/catalog/cubit/catalog_cubit.dart';
-import '../../features/catalog/cubit/catalog_state.dart';
-import '../../features/analysis/views/analysis_view.dart';
-import '../../features/analysis/cubit/analysis_cubit.dart';
-import '../../features/guide/views/license_guide_view.dart';
+import 'package:art_analyst_app/features/catalog/views/catalog_view.dart';
+import 'package:art_analyst_app/features/catalog/cubit/catalog_cubit.dart';
+import 'package:art_analyst_app/features/catalog/cubit/catalog_state.dart';
+import 'package:art_analyst_app/features/analysis/views/analysis_view.dart';
+import 'package:art_analyst_app/features/analysis/cubit/analysis_cubit.dart';
+import 'package:art_analyst_app/features/guide/views/license_guide_view.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');

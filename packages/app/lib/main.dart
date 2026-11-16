@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'core/theme/app_theme.dart';
-import 'core/router/app_router.dart';
-import 'data/repositories/artwork_repository.dart';
-import 'features/catalog/cubit/catalog_cubit.dart';
-import 'features/analysis/cubit/analysis_cubit.dart';
+import 'package:art_analyst_app/core/theme/app_theme.dart';
+import 'package:art_analyst_app/core/router/app_router.dart';
+import 'package:art_analyst_app/data/repositories/artwork_repository.dart';
+import 'package:art_analyst_app/features/catalog/cubit/catalog_cubit.dart';
+import 'package:art_analyst_app/features/analysis/cubit/analysis_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

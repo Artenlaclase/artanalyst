@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:art_analyst_shared/shared.dart';
-import '../../licensing/widgets/license_badge.dart';
+import 'package:art_analyst_app/features/licensing/widgets/license_badge.dart';
 
 /// Catalog card presenting an artwork with its metadata and license semaphore.
 class ArtworkCard extends StatelessWidget {

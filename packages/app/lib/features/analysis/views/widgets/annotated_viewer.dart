@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:art_analyst_shared/shared.dart';
 import 'composition_overlay.dart';
 import 'color_palette_overlay.dart';
-import '../../../licensing/widgets/copyright_placeholder.dart';
+import 'package:art_analyst_app/features/licensing/widgets/copyright_placeholder.dart';
 
 /// The central interactive artwork viewer in ArtAnalyst.
 /// Supports deep zoom & pan, composition overlays, and user ROI annotations.

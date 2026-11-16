@@ -6,7 +6,7 @@ import '../cubit/analysis_cubit.dart';
 import '../cubit/analysis_state.dart';
 import 'widgets/annotated_viewer.dart';
 import 'widgets/panofsky_stepper.dart';
-import '../../licensing/widgets/license_badge.dart';
+import 'package:art_analyst_app/features/licensing/widgets/license_badge.dart';
 
 class AnalysisView extends StatelessWidget {
   final String artworkId;
