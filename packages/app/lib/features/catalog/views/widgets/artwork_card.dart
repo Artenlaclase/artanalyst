@@ -39,6 +39,26 @@ class ArtworkCard extends StatelessWidget {
                     Image.network(
                       image!.thumbnailUrl ?? image!.imageUrl!,
                       fit: BoxFit.cover,
+                      cacheWidth: 600,
+                      loadingBuilder: (context, child, progress) {
+                        if (progress == null) return child;
+                        return Container(
+                          color: Colors.black.withOpacity(0.04),
+                          child: Center(
+                            child: SizedBox(
+                              width: 28,
+                              height: 28,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Theme.of(context).colorScheme.primary,
+                                value: progress.expectedTotalBytes != null
+                                    ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes!
+                                    : null,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                       errorBuilder: (ctx, err, st) => Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(

@@ -165,6 +165,7 @@ class _AnnotatedViewerState extends State<AnnotatedViewer> {
                         Image.network(
                           image.imageUrl!,
                           fit: BoxFit.contain,
+                          cacheWidth: 1400,
                           loadingBuilder: (context, child, progress) {
                             if (progress == null) return child;
                             return Center(

@@ -83,12 +83,12 @@ class ArtworkRepository {
   ];
 
   final Map<String, ArtworkImage> _mockImages = {
-    // 1. Van Gogh - Verde CC0
+    // 1. Van Gogh - Verde CC0 (Optimizado: 600px thumbnail, 1200px alta definición)
     'a1000000-0000-0000-0000-000000000001': const ArtworkImage(
       id: 'img-01',
       artworkId: 'a1000000-0000-0000-0000-000000000001',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Van_Gogh_Self-Portrait_with_Straw_Hat_1887-Metropolitan.jpg',
-      thumbnailUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Van_Gogh_Self-Portrait_with_Straw_Hat_1887-Metropolitan.jpg',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Van_Gogh_Self-Portrait_with_Straw_Hat_1887-Metropolitan.jpg/1200px-Van_Gogh_Self-Portrait_with_Straw_Hat_1887-Metropolitan.jpg',
+      thumbnailUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Van_Gogh_Self-Portrait_with_Straw_Hat_1887-Metropolitan.jpg/600px-Van_Gogh_Self-Portrait_with_Straw_Hat_1887-Metropolitan.jpg',
       licenseType: LicenseType.cc0,
       licenseUri: 'https://creativecommons.org/publicdomain/zero/1.0/',
       attributionText: '"Autorretrato con sombrero de paja" por Vincent van Gogh. The Metropolitan Museum of Art. Dominio Público CC0.',
@@ -97,12 +97,12 @@ class ArtworkRepository {
       width: 2718,
       height: 3420,
     ),
-    // 2. Monet - Verde CC0
+    // 2. Monet - Verde CC0 (Optimizado: 600px thumbnail, 1200px alta definición)
     'a2000000-0000-0000-0000-000000000002': const ArtworkImage(
       id: 'img-02',
       artworkId: 'a2000000-0000-0000-0000-000000000002',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/14/Claude_Monet_-_Water_Lilies_-_Google_Art_Project.jpg',
-      thumbnailUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/14/Claude_Monet_-_Water_Lilies_-_Google_Art_Project.jpg',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Claude_Monet_-_Water_Lilies_-_Google_Art_Project.jpg/1200px-Claude_Monet_-_Water_Lilies_-_Google_Art_Project.jpg',
+      thumbnailUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Claude_Monet_-_Water_Lilies_-_Google_Art_Project.jpg/600px-Claude_Monet_-_Water_Lilies_-_Google_Art_Project.jpg',
       licenseType: LicenseType.cc0,
       licenseUri: 'https://creativecommons.org/publicdomain/zero/1.0/',
       attributionText: '"Nenúfares" por Claude Monet. Cleveland Museum of Art. Dominio Público CC0.',
@@ -111,12 +111,12 @@ class ArtworkRepository {
       width: 2800,
       height: 3274,
     ),
-    // 3. Vermeer - Verde PDM
+    // 3. Vermeer - Verde PDM (Optimizado: 600px thumbnail, 1200px alta definición)
     'a3000000-0000-0000-0000-000000000003': const ArtworkImage(
       id: 'img-03',
       artworkId: 'a3000000-0000-0000-0000-000000000003',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/1665_Girl_with_a_Pearl_Earring.jpg',
-      thumbnailUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/1665_Girl_with_a_Pearl_Earring.jpg',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/1665_Girl_with_a_Pearl_Earring.jpg/1200px-1665_Girl_with_a_Pearl_Earring.jpg',
+      thumbnailUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/1665_Girl_with_a_Pearl_Earring.jpg/600px-1665_Girl_with_a_Pearl_Earring.jpg',
       licenseType: LicenseType.publicDomainMark,
       licenseUri: 'https://creativecommons.org/publicdomain/mark/1.0/',
       attributionText: '"La joven de la perla" por Johannes Vermeer. Mauritshuis. Dominio Público Mundial (PDM).',
@@ -125,12 +125,12 @@ class ArtworkRepository {
       width: 1400,
       height: 1600,
     ),
-    // 4. Caspar David Friedrich - Amarillo CC BY-SA
+    // 4. Caspar David Friedrich - Amarillo CC BY-SA (Optimizado: 600px thumbnail, 1200px alta definición)
     'a5000000-0000-0000-0000-000000000005': const ArtworkImage(
       id: 'img-05',
       artworkId: 'a5000000-0000-0000-0000-000000000005',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b9/Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpg',
-      thumbnailUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b9/Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpg',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpg/1200px-Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpg',
+      thumbnailUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpg/600px-Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpg',
       licenseType: LicenseType.ccBySa,
       licenseUri: 'https://creativecommons.org/licenses/by-sa/4.0/',
       attributionText: '"El caminante sobre el mar de nubes" por Caspar David Friedrich. Hamburger Kunsthalle / Reproducción digital bajo CC BY-SA 4.0. Las obras derivadas deben compartirse con la misma licencia.',
