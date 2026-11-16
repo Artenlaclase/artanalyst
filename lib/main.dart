@@ -1,6 +1,5 @@
-// Entry point at root forwarding to packages/app
 import 'package:flutter/material.dart';
-import '../packages/app/lib/main.dart' as app;
+import 'package:art_analyst_app/main.dart' as app;
 
 void main() {
   app.main();

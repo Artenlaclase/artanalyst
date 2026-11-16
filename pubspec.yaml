@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   art_analyst_shared:
     path: packages/shared
+  art_analyst_app:
+    path: packages/app
   flutter_bloc: ^8.1.3
   go_router: ^14.0.0
   http: ^1.2.0
