@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:art_analyst_shared/shared.dart';
 import 'package:art_analyst_app/features/licensing/widgets/license_badge.dart';
+import 'package:art_analyst_app/core/widgets/smart_artwork_image.dart';
 
 /// Catalog card presenting an artwork with its metadata and license semaphore.
 class ArtworkCard extends StatelessWidget {
@@ -36,63 +37,13 @@ class ArtworkCard extends StatelessWidget {
                 fit: StackFit.expand,
                 children: [
                   if (hasDirectImage)
-                    Image.network(
-                      image!.thumbnailUrl ?? image!.imageUrl!,
+                    SmartArtworkImage(
+                      artworkId: artwork.id,
+                      imageUrl: image!.thumbnailUrl ?? image!.imageUrl,
                       fit: BoxFit.cover,
                       cacheWidth: 600,
-                      loadingBuilder: (context, child, progress) {
-                        if (progress == null) return child;
-                        return Container(
-                          color: Colors.black.withOpacity(0.04),
-                          child: Center(
-                            child: SizedBox(
-                              width: 28,
-                              height: 28,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: Theme.of(context).colorScheme.primary,
-                                value: progress.expectedTotalBytes != null
-                                    ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes!
-                                    : null,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      errorBuilder: (ctx, err, st) => Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              const Color(0xFF8B4513).withOpacity(0.85),
-                              const Color(0xFF3E2723),
-                            ],
-                          ),
-                        ),
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.palette_rounded, size: 36, color: Colors.amberAccent),
-                            const SizedBox(height: 8),
-                            Text(
-                              artwork.title,
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              artwork.artistName ?? '',
-                              textAlign: TextAlign.center,
-                              maxLines: 1,
-                              style: const TextStyle(color: Colors.white70, fontSize: 10),
-                            ),
-                          ],
-                        ),
-                      ),
+                      placeholderTitle: artwork.title,
+                      placeholderArtist: artwork.artistName,
                     )
                   else
                     Container(

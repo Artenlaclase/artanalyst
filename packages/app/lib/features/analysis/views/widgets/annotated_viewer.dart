@@ -3,6 +3,7 @@ import 'package:art_analyst_shared/shared.dart';
 import 'composition_overlay.dart';
 import 'color_palette_overlay.dart';
 import 'package:art_analyst_app/features/licensing/widgets/copyright_placeholder.dart';
+import 'package:art_analyst_app/core/widgets/smart_artwork_image.dart';
 
 /// The central interactive artwork viewer in ArtAnalyst.
 /// Supports deep zoom & pan, composition overlays, and user ROI annotations.
@@ -162,62 +163,13 @@ class _AnnotatedViewerState extends State<AnnotatedViewer> {
                       fit: StackFit.expand,
                       children: [
                         // Base Artwork Image
-                        Image.network(
-                          image.imageUrl!,
+                        SmartArtworkImage(
+                          artworkId: widget.artwork.id,
+                          imageUrl: image.imageUrl,
                           fit: BoxFit.contain,
                           cacheWidth: 1400,
-                          loadingBuilder: (context, child, progress) {
-                            if (progress == null) return child;
-                            return Center(
-                              child: CircularProgressIndicator(
-                                value: progress.expectedTotalBytes != null
-                                    ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes!
-                                    : null,
-                              ),
-                            );
-                          },
-                          errorBuilder: (context, error, stackTrace) => Container(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [Color(0xFF4E342E), Color(0xFF2E1C14)],
-                              ),
-                            ),
-                            padding: const EdgeInsets.all(24),
-                            child: Center(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Icon(Icons.art_track_rounded, size: 56, color: Colors.amberAccent),
-                                  const SizedBox(height: 16),
-                                  Text(
-                                    widget.artwork.title,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    '${widget.artwork.artistName ?? ''} • ${widget.artwork.dateDisplay ?? ''}',
-                                    style: const TextStyle(color: Colors.white70, fontSize: 13),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white12,
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(color: Colors.white24),
-                                    ),
-                                    child: const Text(
-                                      'Lienzo activo: puedes aplicar capas de composición y anotar',
-                                      style: TextStyle(color: Colors.amberAccent, fontSize: 12),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          placeholderTitle: widget.artwork.title,
+                          placeholderArtist: '${widget.artwork.artistName ?? ''} • ${widget.artwork.dateDisplay ?? ''}',
                         ),
 
                         // Composition Guides Overlay
