@@ -382,8 +382,6 @@ class CatalogView extends StatelessWidget {
               ),
             ],
           );
-            ],
-          );
         },
       ),
     );

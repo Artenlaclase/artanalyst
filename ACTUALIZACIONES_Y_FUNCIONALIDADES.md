@@ -54,6 +54,56 @@ Este documento detalla el historial de cambios técnicos aplicados en el reposit
 * **Causa del Error 404 Inicial en Vercel:** Al conectar GitHub con Vercel directamente, Vercel no encontraba la web porque `build/` está en `.gitignore` (no viaja a GitHub) y Vercel no incluye el SDK de Flutter en sus contenedores estándar. Se documentaron las dos soluciones: despliegue de la carpeta compilada mediante CLI (`npx vercel build/web --prod`) y compilación automática mediante script CI/CD (`scripts/vercel_build.sh`).
 * **Integración de Vercel Web Analytics:** Se integró el script nativo de analíticas de Vercel (`/_vercel/insights/script.js`) en `web/index.html`, `packages/app/web/index.html` y `build/web/index.html` para monitorear visitas y páginas vistas sin impacto en el rendimiento.
 
+### 1.8. Corrección de Legibilidad y Tipografía Móvil en Modo Oscuro
+* **Detección del Problema en Dispositivos Móviles:** Mediante capturas de pantalla de un smartphone navegando en `artanalyst.vercel.app/#/study` bajo Modo Oscuro, se detectó que los contenedores de texto poseían fondos fijos claros (`Colors.white`, `Colors.grey.shade50`) mientras el tema global aplicaba texto blanco/crema por defecto, provocando texto invisible o con pésimo contraste. Asimismo, el tamaño de letra (11–13px) resultaba pequeño e incómodo de leer en celulares.
+* **Solución de Contraste Adaptable al Tema (`isDark`):** Se refactorizaron completamente `StudyView` (`study_view.dart`) y el stepper interactivo de Panofsky (`panofsky_stepper.dart`), implementando selectores automáticos de color basados en `final isDark = Theme.of(context).brightness == Brightness.dark;`:
+  * En Modo Oscuro se emplean fondos profundos cálidos (`#1E1B18`, `#241E19`, `#1E2A38`, `#142E1C`) con bordes atenuados y tipografías en blanco/crema de alta legibilidad (`Colors.white.withOpacity(0.92)`).
+  * En Modo Claro se mantienen tonos suaves con texto oscuro (`Colors.black87`).
+* **Incremento de Tipografía y Espaciado Móvil:**
+  * Títulos de sección: aumentados a 18–22px con negrita (`FontWeight.bold`).
+  * Subtítulos y preguntas guía: aumentados a 14–16px.
+  * Texto de párrafos y citas metodológicas: aumentados a 14.5–16px con interlineado holgado (`height: 1.5–1.55`) para lectura fluida.
+* **Tarjetas Sinópticas Adaptables vs. Tabla Rígida:** Se reemplazó el `DataTable` horizontal (que sufría desbordamiento horizontal en celulares) por tarjetas verticales modulares (`_buildSinopticCard`) que presentan el nivel, objeto de interpretación, acto de interpretación y principio correctivo en formato vertical perfectamente adaptado a cualquier pantalla de móvil.
+
+### 1.9. Scroll Infinito y Carga Progresiva en el Catálogo
+* **Arquitectura de Carga Progresiva:** En `CatalogState` y `CatalogCubit` se introdujo el manejo de paginación reactiva (`visibleCount`, `pagedArtworks`, `hasMoreToLoad`, `totalMatchingCount`).
+* **Scroll Continuo:** `CatalogView` escucha eventos de desplazamiento con `NotificationListener<ScrollNotification>`. Cuando el usuario se aproxima al 90% del scroll vertical, la aplicación solicita automáticamente el siguiente lote de obras maestras.
+* **Control Visual y Contador Dinámico:** Se incorporó al pie del catálogo un botón interactivo *"Cargar más obras maestras"* junto a un contador en tiempo real (*"Mostrando X de Y obras maestras"*), permitiendo navegar grandes colecciones sin sobrecargar la memoria del navegador.
+
+### 1.10. Búsqueda y Filtros Avanzados por Artista y Movimiento Artístico
+* **Filtros Específicos por Artista:** Fila de chips de desplazamiento horizontal que permite filtrar al instante por artistas destacados (Van Gogh, Monet, Vermeer, Caspar David Friedrich, Leonardo da Vinci, Rembrandt, Francisco de Goya, Sandro Botticelli, Edgar Degas, Paul Cézanne, Katsushika Hokusai, Edvard Munch, Gustav Klimt).
+* **Filtros Específicos por Movimiento:** Chips dedicados para filtrar por época o escuela estética (Renacimiento, Barroco, Romanticismo, Impresionismo, Postimpresionismo, Expresionismo, Ukiyo-e, Modernismo).
+* **Búsqueda Global Unificada:** El campo de búsqueda principal ahora busca en simultáneo por título de la obra, nombre del artista y movimiento estético.
+* **Botón de Limpieza Rápida:** Acceso rápido para restablecer todos los filtros y volver a la vista completa del catálogo con un solo clic.
+
+### 1.11. Nueva Sección Metodológica: "Movimientos & Exponentes" (7 Corrientes y 1–2 Exponentes Clave)
+* **Pestaña 4 en la Guía de Estudio (`StudyView`):** Módulo pedagógico exhaustivo que sintetiza las corrientes estéticas de mayor impacto en la historia del arte:
+  1. **Renacimiento:** Leonardo da Vinci (*La Gioconda*) y Sandro Botticelli (*El nacimiento de Venus*).
+  2. **Barroco:** Johannes Vermeer (*La joven de la perla*) y Rembrandt van Rijn (*La ronda de noche*).
+  3. **Romanticismo:** Caspar David Friedrich (*El caminante sobre el mar de nubes*) y Francisco de Goya (*El 3 de mayo en Madrid*).
+  4. **Impresionismo:** Claude Monet (*Nenúfares*) y Edgar Degas (*La clase de danza*).
+  5. **Postimpresionismo:** Vincent van Gogh (*Autorretrato con sombrero de paja*) y Paul Cézanne (*Los jugadores de cartas*).
+  6. **Vanguardias / Expresionismo:** Edvard Munch (*El grito*) y Pablo Picasso (*Las señoritas de Aviñón*).
+  7. **Arte Oriental / Ukiyo-e:** Katsushika Hokusai (*La gran ola de Kanagawa*).
+* **Estructura Didáctica por Movimiento:**
+  * Período histórico y contexto sociocultural.
+  * **Fórmula Óptica de Wölfflin:** Explicación concreta de qué pares contrapuestos rigen la visión del movimiento (ej. Lineal vs. Pictórico, Superficie vs. Profundidad, Forma Abierta vs. Cerrada).
+  * Ficha biográfica sintética del exponente (años de vida, nacionalidad, aporte revolucionario y obra cumbre).
+  * Botón interactivo de integración directa: *"Explorar obras de este movimiento en el Catálogo"*, que redirige al catálogo y activa el filtro correspondiente en un toque.
+
+### 1.12. Ampliación Curada del Repositorio de Obras Maestras
+* **Expansión a 15 Obras Maestras Representativas (`ArtworkRepository`):** Se añadieron fichas técnicas y modelos de análisis pedagógico para obras cumbre de los movimientos citados:
+  * *La Gioconda* (Leonardo da Vinci, Renacimiento).
+  * *El nacimiento de Venus* (Sandro Botticelli, Renacimiento).
+  * *La ronda de noche* (Rembrandt, Barroco).
+  * *El 3 de mayo en Madrid* (Francisco de Goya, Romanticismo).
+  * *La clase de danza* (Edgar Degas, Impresionismo).
+  * *Los jugadores de cartas* (Paul Cézanne, Postimpresionismo).
+  * *La gran ola de Kanagawa* (Katsushika Hokusai, Ukiyo-e).
+  * *El grito* (Edvard Munch, Expresionismo).
+  * *El beso* (Gustav Klimt, Modernismo/Secesión).
+* **Vinculación con Licencias TASL y Fuentes:** Cada obra incluye metadatos de conservación, procedencia museográfica (The Met, Cleveland Museum of Art, Rijksmuseum, British Museum, Wikimedia Commons) y estado de semáforo legal.
+
 ---
 
 ## 2. Catálogo de Funcionalidades Implementadas
