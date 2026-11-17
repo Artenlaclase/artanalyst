@@ -59,43 +59,117 @@ class CatalogView extends StatelessWidget {
           }
 
           final loaded = state as CatalogLoaded;
-          final artworks = loaded.filteredArtworks;
+          final artworks = loaded.pagedArtworks;
+          final totalMatching = loaded.totalMatchingCount;
 
           return Column(
             children: [
-              // Search & License Filters Bar
+              // Search & Filters Bar
               Container(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+                padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
                 color: Theme.of(context).cardColor,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Search bar
                     TextField(
-                      decoration: const InputDecoration(
-                        hintText: 'Buscar por obra, artista o museo (ej. Mona Lisa, Van Gogh)...',
-                        prefixIcon: Icon(Icons.search),
+                      style: const TextStyle(fontSize: 15),
+                      decoration: InputDecoration(
+                        hintText: 'Buscar por artista (Van Gogh, Monet...), movimiento o título...',
+                        hintStyle: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.55)),
+                        prefixIcon: const Icon(Icons.search),
                         isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                       ),
                       onChanged: (val) => context.read<CatalogCubit>().search(val),
                     ),
-                    const SizedBox(height: 6),
-                    Row(
-                      children: [
-                        Icon(Icons.visibility_outlined, size: 13, color: Colors.grey.shade600),
-                        const SizedBox(width: 6),
-                        Text(
-                          'Mostrando obras con reproducción digital disponible. Si buscas una obra protegida, te indicaremos dónde verla oficialmente.',
-                          style: TextStyle(fontSize: 11, color: Colors.grey.shade600, fontStyle: FontStyle.italic),
-                        ),
-                      ],
-                    ),
                     const SizedBox(height: 10),
+
+                    // Filter by Movement row
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          const Text('Movimiento: ', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                          const SizedBox(width: 6),
+                          FilterChip(
+                            label: const Text('Todos'),
+                            selected: loaded.filterMovement == null,
+                            onSelected: (_) => context.read<CatalogCubit>().filterByMovement(null),
+                          ),
+                          const SizedBox(width: 6),
+                          ...[
+                            'Postimpresionismo',
+                            'Impresionismo',
+                            'Barroco',
+                            'Romanticismo',
+                            'Renacimiento',
+                            'Ukiyo-e',
+                            'Expresionismo',
+                            'Modernismo',
+                          ].map((mov) => Padding(
+                                padding: const EdgeInsets.only(right: 6),
+                                child: FilterChip(
+                                  label: Text(mov),
+                                  selected: loaded.filterMovement?.toLowerCase() == mov.toLowerCase(),
+                                  onSelected: (_) => context.read<CatalogCubit>().filterByMovement(
+                                        loaded.filterMovement?.toLowerCase() == mov.toLowerCase() ? null : mov,
+                                      ),
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+
+                    // Filter by Artist row
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          const Text('Artista: ', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                          const SizedBox(width: 6),
+                          FilterChip(
+                            label: const Text('Todos los artistas'),
+                            selected: loaded.filterArtist == null,
+                            onSelected: (_) => context.read<CatalogCubit>().filterByArtist(null),
+                          ),
+                          const SizedBox(width: 6),
+                          ...[
+                            'Vincent van Gogh',
+                            'Claude Monet',
+                            'Johannes Vermeer',
+                            'Caspar David Friedrich',
+                            'Leonardo da Vinci',
+                            'Rembrandt van Rijn',
+                            'Francisco de Goya',
+                            'Sandro Botticelli',
+                            'Edgar Degas',
+                            'Paul Cézanne',
+                            'Katsushika Hokusai',
+                            'Edvard Munch',
+                            'Gustav Klimt',
+                          ].map((art) => Padding(
+                                padding: const EdgeInsets.only(right: 6),
+                                child: FilterChip(
+                                  label: Text(art),
+                                  selected: loaded.filterArtist?.toLowerCase() == art.toLowerCase(),
+                                  onSelected: (_) => context.read<CatalogCubit>().filterByArtist(
+                                        loaded.filterArtist?.toLowerCase() == art.toLowerCase() ? null : art,
+                                      ),
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+
                     // Traffic light filters
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          const Text('Filtro de Semáforo: ', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                          const Text('Semáforo: ', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
                           const SizedBox(width: 6),
                           FilterChip(
                             label: const Text('Todos'),
@@ -105,7 +179,7 @@ class CatalogView extends StatelessWidget {
                           const SizedBox(width: 6),
                           FilterChip(
                             avatar: const Icon(Icons.circle, size: 12, color: Color(0xFF2E7D32)),
-                            label: const Text('Verde (CC0 / Dominio Público)'),
+                            label: const Text('Verde (CC0)'),
                             selected: loaded.filterSemaphore == LicenseSemaphore.green,
                             onSelected: (_) => context.read<CatalogCubit>().filterBySemaphore(
                               loaded.filterSemaphore == LicenseSemaphore.green ? null : LicenseSemaphore.green,
@@ -114,7 +188,7 @@ class CatalogView extends StatelessWidget {
                           const SizedBox(width: 6),
                           FilterChip(
                             avatar: const Icon(Icons.circle, size: 12, color: Color(0xFFEF6C00)),
-                            label: const Text('Amarillo (CC con Atribución)'),
+                            label: const Text('Amarillo (CC BY)'),
                             selected: loaded.filterSemaphore == LicenseSemaphore.yellow,
                             onSelected: (_) => context.read<CatalogCubit>().filterBySemaphore(
                               loaded.filterSemaphore == LicenseSemaphore.yellow ? null : LicenseSemaphore.yellow,
@@ -123,7 +197,7 @@ class CatalogView extends StatelessWidget {
                           const SizedBox(width: 6),
                           FilterChip(
                             avatar: const Icon(Icons.circle, size: 12, color: Color(0xFFC62828)),
-                            label: const Text('Rojo (Derechos Reservados)'),
+                            label: const Text('Rojo (Copyright)'),
                             selected: loaded.filterSemaphore == LicenseSemaphore.red,
                             onSelected: (_) => context.read<CatalogCubit>().filterBySemaphore(
                               loaded.filterSemaphore == LicenseSemaphore.red ? null : LicenseSemaphore.red,
@@ -136,37 +210,67 @@ class CatalogView extends StatelessWidget {
                 ),
               ),
 
-              // Educational study banner
+              // Educational study & movements banner
               InkWell(
-                onTap: () => context.go('/study'),
+                onTap: () => context.go('/study?tab=1'),
                 child: Container(
                   margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF8B4513).withOpacity(0.07),
+                    color: Theme.of(context).colorScheme.primary.withOpacity(0.08),
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: const Color(0xFF8B4513).withOpacity(0.2)),
+                    border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.25)),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.auto_stories_rounded, size: 20, color: Color(0xFF8B4513)),
+                      Icon(Icons.palette_rounded, size: 22, color: Theme.of(context).colorScheme.primary),
                       const SizedBox(width: 10),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          '¿Cómo analizar una obra? Descubre el Método de Panofsky, los 5 pares de Wölfflin y el funcionamiento de la app.',
-                          style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w500, color: Color(0xFF5D2E0C)),
+                          'Explora los Movimientos Artísticos y sus Exponentes clave (Renacimiento, Barroco, Impresionismo...).',
+                          style: TextStyle(
+                            fontSize: 13.5,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
                         ),
                       ),
                       TextButton(
-                        onPressed: () => context.go('/study'),
-                        child: const Text('Abrir Estudio', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                        onPressed: () => context.go('/study?tab=1'),
+                        child: const Text('Ver Movimientos', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
                       ),
                     ],
                   ),
                 ),
               ),
 
-              // Artworks Grid
+              // Results count header
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Mostrando ${artworks.length} de $totalMatching obras maestras',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                      ),
+                    ),
+                    if (loaded.filterMovement != null || loaded.filterArtist != null || loaded.filterSemaphore != null || loaded.searchQuery.isNotEmpty)
+                      InkWell(
+                        onTap: () => context.read<CatalogCubit>().resetFilters(),
+                        child: Text(
+                          'Limpiar filtros',
+                          style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+
+              // Artworks Grid with infinite scroll / load more
               Expanded(
                 child: artworks.isEmpty
                     ? Center(
@@ -178,49 +282,28 @@ class CatalogView extends StatelessWidget {
                               Container(
                                 padding: const EdgeInsets.all(16),
                                 decoration: BoxDecoration(
-                                  color: (loaded.filterSemaphore != null)
-                                      ? (loaded.filterSemaphore == LicenseSemaphore.yellow
-                                          ? const Color(0xFFEF6C00).withOpacity(0.12)
-                                          : loaded.filterSemaphore == LicenseSemaphore.green
-                                              ? const Color(0xFF2E7D32).withOpacity(0.12)
-                                              : const Color(0xFFC62828).withOpacity(0.12))
-                                      : Colors.grey.withOpacity(0.12),
+                                  color: Colors.grey.withOpacity(0.12),
                                   shape: BoxShape.circle,
                                 ),
-                                child: Icon(
-                                  Icons.filter_alt_off_rounded,
-                                  size: 48,
-                                  color: loaded.filterSemaphore != null
-                                      ? (loaded.filterSemaphore == LicenseSemaphore.yellow
-                                          ? const Color(0xFFEF6C00)
-                                          : loaded.filterSemaphore == LicenseSemaphore.green
-                                              ? const Color(0xFF2E7D32)
-                                              : const Color(0xFFC62828))
-                                      : Colors.grey,
-                                ),
+                                child: const Icon(Icons.filter_alt_off_rounded, size: 48, color: Colors.grey),
                               ),
                               const SizedBox(height: 16),
-                              Text(
-                                loaded.filterSemaphore != null
-                                    ? 'Filtro activo: "${loaded.filterSemaphore!.label}"'
-                                    : 'No se encontraron obras con los criterios actuales.',
+                              const Text(
+                                'No se encontraron obras con los criterios seleccionados.',
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 8),
                               const Text(
-                                'Puedes pulsar el botón para volver a ver todas las obras del catálogo:',
+                                'Prueba buscando otro artista o restablece los filtros:',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(fontSize: 13, color: Colors.grey),
                               ),
                               const SizedBox(height: 20),
                               FilledButton.icon(
                                 icon: const Icon(Icons.refresh_rounded),
-                                label: const Text('Restablecer filtros y ver todas las obras'),
-                                onPressed: () {
-                                  context.read<CatalogCubit>().filterBySemaphore(null);
-                                  context.read<CatalogCubit>().search('');
-                                },
+                                label: const Text('Restablecer filtros y ver todo'),
+                                onPressed: () => context.read<CatalogCubit>().resetFilters(),
                               ),
                             ],
                           ),
@@ -230,36 +313,75 @@ class CatalogView extends StatelessWidget {
                         builder: (context, constraints) {
                           // Adaptive columns: 1 for mobile, 2 for tablet, 3-4 for desktop/web
                           int crossAxisCount = 1;
+                          double aspectRatio = 0.88; // comfortable proportions for mobile
                           if (constraints.maxWidth > 1200) {
                             crossAxisCount = 4;
+                            aspectRatio = 0.76;
                           } else if (constraints.maxWidth > 850) {
                             crossAxisCount = 3;
+                            aspectRatio = 0.76;
                           } else if (constraints.maxWidth > 550) {
                             crossAxisCount = 2;
+                            aspectRatio = 0.82;
                           }
 
-                          return GridView.builder(
-                            padding: const EdgeInsets.all(16),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: crossAxisCount,
-                              childAspectRatio: 0.72,
-                              crossAxisSpacing: 16,
-                              mainAxisSpacing: 16,
-                            ),
-                            itemCount: artworks.length,
-                            itemBuilder: (context, index) {
-                              final artwork = artworks[index];
-                              final image = loaded.primaryImages[artwork.id];
-                              return ArtworkCard(
-                                artwork: artwork,
-                                image: image,
-                                onTap: () => context.go('/artwork/${artwork.id}'),
-                              );
+                          return NotificationListener<ScrollNotification>(
+                            onNotification: (scrollInfo) {
+                              if (scrollInfo.metrics.pixels >= scrollInfo.metrics.maxScrollExtent - 200) {
+                                if (loaded.hasMoreToLoad) {
+                                  context.read<CatalogCubit>().loadMoreArtworks();
+                                }
+                              }
+                              return false;
                             },
+                            child: ListView(
+                              padding: const EdgeInsets.all(16),
+                              children: [
+                                GridView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: crossAxisCount,
+                                    childAspectRatio: aspectRatio,
+                                    crossAxisSpacing: 16,
+                                    mainAxisSpacing: 16,
+                                  ),
+                                  itemCount: artworks.length,
+                                  itemBuilder: (context, index) {
+                                    final artwork = artworks[index];
+                                    final image = loaded.primaryImages[artwork.id];
+                                    return ArtworkCard(
+                                      artwork: artwork,
+                                      image: image,
+                                      onTap: () => context.go('/artwork/${artwork.id}'),
+                                    );
+                                  },
+                                ),
+                                if (loaded.hasMoreToLoad) ...[
+                                  const SizedBox(height: 20),
+                                  Center(
+                                    child: OutlinedButton.icon(
+                                      style: OutlinedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                                      ),
+                                      onPressed: () => context.read<CatalogCubit>().loadMoreArtworks(),
+                                      icon: const Icon(Icons.expand_more_rounded),
+                                      label: Text(
+                                        'Cargar más obras maestras (${totalMatching - artworks.length} restantes)',
+                                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 30),
+                                ],
+                              ],
+                            ),
                           );
                         },
                       ),
               ),
+            ],
+          );
             ],
           );
         },

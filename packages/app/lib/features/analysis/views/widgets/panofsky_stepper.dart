@@ -77,6 +77,7 @@ class _PanofskyStepperState extends State<PanofskyStepper> {
       return const Center(child: Text('No hay guiones de análisis disponibles para esta obra.'));
     }
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final levels = [PanofskyLevel.formal, PanofskyLevel.iconographic, PanofskyLevel.iconological];
 
     return Column(
@@ -101,11 +102,11 @@ class _PanofskyStepperState extends State<PanofskyStepper> {
               state: isCompleted ? StepState.complete : StepState.indexed,
               title: Text(
                 level.title,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
               subtitle: Text(
                 level.questionPrompt,
-                style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                style: TextStyle(fontSize: 13, color: isDark ? Colors.grey.shade400 : Colors.grey.shade700),
               ),
               content: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,13 +116,18 @@ class _PanofskyStepperState extends State<PanofskyStepper> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary.withOpacity(0.06),
+                      color: Theme.of(context).colorScheme.primary.withOpacity(isDark ? 0.15 : 0.06),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.2)),
+                      border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(isDark ? 0.35 : 0.2)),
                     ),
                     child: Text(
                       guide?.prompt ?? level.questionPrompt,
-                      style: const TextStyle(fontSize: 13.5, height: 1.45, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                        fontSize: 14,
+                        height: 1.45,
+                        fontWeight: FontWeight.w500,
+                        color: isDark ? Colors.white.withOpacity(0.95) : null,
+                      ),
                     ),
                   ),
 
@@ -130,36 +136,48 @@ class _PanofskyStepperState extends State<PanofskyStepper> {
                     const SizedBox(height: 8),
                     ExpansionTile(
                       tilePadding: EdgeInsets.zero,
-                      leading: const Icon(Icons.compare_arrows_rounded, color: Color(0xFF1E88E5), size: 20),
-                      title: const Text(
+                      leading: Icon(
+                        Icons.compare_arrows_rounded,
+                        color: isDark ? Colors.blue.shade300 : const Color(0xFF1E88E5),
+                        size: 20,
+                      ),
+                      title: Text(
                         'Esquema óptico de Wölfflin (5 pares contrapuestos)',
-                        style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold, color: Color(0xFF1E88E5)),
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? Colors.blue.shade300 : const Color(0xFF1E88E5),
+                        ),
                       ),
                       children: [
                         Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: Colors.blue.shade50.withOpacity(0.5),
+                            color: isDark ? const Color(0xFF152238) : Colors.blue.shade50.withOpacity(0.5),
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.blue.shade200),
+                            border: Border.all(color: isDark ? Colors.blue.shade700 : Colors.blue.shade200),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text(
                                 'Aplica estos criterios para entender cómo se organiza la visión (Wölfflin, 1915/2017):',
-                                style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.bold,
+                                  color: isDark ? Colors.blue.shade100 : Colors.black87,
+                                ),
                               ),
-                              SizedBox(height: 6),
-                              Text('• 1. Lineal vs. Pictórico: contornos táctiles precisos frente a manchas ópticas y claroscuros.', style: TextStyle(fontSize: 11.5)),
-                              SizedBox(height: 4),
-                              Text('• 2. Superficial vs. Profundo: ordenación en planos frontales paralelos frente a penetración diagonal/escorzos.', style: TextStyle(fontSize: 11.5)),
-                              SizedBox(height: 4),
-                              Text('• 3. Forma cerrada vs. Forma abierta: composición tectónica simétrica frente a atectónica que alude al exterior.', style: TextStyle(fontSize: 11.5)),
-                              SizedBox(height: 4),
-                              Text('• 4. Pluralidad vs. Unidad: partes autónomas articuladas frente a subordinación a un motivo dominante.', style: TextStyle(fontSize: 11.5)),
-                              SizedBox(height: 4),
-                              Text('• 5. Claridad absoluta vs. Claridad relativa: visibilidad completa de formas frente a penumbra y enigmas.', style: TextStyle(fontSize: 11.5)),
+                              const SizedBox(height: 6),
+                              Text('• 1. Lineal vs. Pictórico: contornos táctiles precisos frente a manchas ópticas y claroscuros.', style: TextStyle(fontSize: 12.5, color: isDark ? Colors.grey.shade300 : Colors.black87)),
+                              const SizedBox(height: 4),
+                              Text('• 2. Superficial vs. Profundo: ordenación en planos frontales paralelos frente a penetración diagonal/escorzos.', style: TextStyle(fontSize: 12.5, color: isDark ? Colors.grey.shade300 : Colors.black87)),
+                              const SizedBox(height: 4),
+                              Text('• 3. Forma cerrada vs. Forma abierta: composición tectónica simétrica frente a atectónica que alude al exterior.', style: TextStyle(fontSize: 12.5, color: isDark ? Colors.grey.shade300 : Colors.black87)),
+                              const SizedBox(height: 4),
+                              Text('• 4. Pluralidad vs. Unidad: partes autónomas articuladas frente a subordinación a un motivo dominante.', style: TextStyle(fontSize: 12.5, color: isDark ? Colors.grey.shade300 : Colors.black87)),
+                              const SizedBox(height: 4),
+                              Text('• 5. Claridad absoluta vs. Claridad relativa: visibilidad completa de formas frente a penumbra y enigmas.', style: TextStyle(fontSize: 12.5, color: isDark ? Colors.grey.shade300 : Colors.black87)),
                             ],
                           ),
                         ),
@@ -176,7 +194,7 @@ class _PanofskyStepperState extends State<PanofskyStepper> {
                         children: [
                           Icon(Icons.lightbulb_outline, size: 16, color: Colors.amber),
                           SizedBox(width: 6),
-                          Text('Pistas para el análisis', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                          Text('Pistas para el análisis', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
                         ],
                       ),
                       children: guide.hints.map((hint) {
@@ -186,7 +204,7 @@ class _PanofskyStepperState extends State<PanofskyStepper> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text('• ', style: TextStyle(fontWeight: FontWeight.bold)),
-                              Expanded(child: Text(hint, style: const TextStyle(fontSize: 12, height: 1.3))),
+                              Expanded(child: Text(hint, style: TextStyle(fontSize: 12.5, height: 1.35, color: isDark ? Colors.grey.shade300 : Colors.black87))),
                             ],
                           ),
                         );
@@ -201,7 +219,7 @@ class _PanofskyStepperState extends State<PanofskyStepper> {
                     maxLines: 4,
                     decoration: InputDecoration(
                       hintText: 'Redacta aquí tus observaciones analíticas...',
-                      hintStyle: const TextStyle(fontSize: 12.5),
+                      hintStyle: TextStyle(fontSize: 13, color: isDark ? Colors.grey.shade400 : Colors.grey.shade600),
                       suffixIcon: IconButton(
                         tooltip: 'Guardar borrador',
                         icon: const Icon(Icons.save_as_outlined, size: 18),
@@ -233,23 +251,23 @@ class _PanofskyStepperState extends State<PanofskyStepper> {
                     Container(
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF2E7D32).withOpacity(0.08),
+                        color: isDark ? const Color(0xFF142E1C) : const Color(0xFF2E7D32).withOpacity(0.08),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFF2E7D32).withOpacity(0.4)),
+                        border: Border.all(color: isDark ? Colors.green.shade600 : const Color(0xFF2E7D32).withOpacity(0.4)),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Row(
+                          Row(
                             children: [
-                              Icon(Icons.school_rounded, size: 18, color: Color(0xFF2E7D32)),
-                              SizedBox(width: 8),
+                              Icon(Icons.school_rounded, size: 18, color: isDark ? Colors.greenAccent.shade200 : const Color(0xFF2E7D32)),
+                              const SizedBox(width: 8),
                               Text(
                                 'Respuesta Modelo (Curada por el equipo pedagógico):',
                                 style: TextStyle(
-                                  color: Color(0xFF2E7D32),
+                                  color: isDark ? Colors.greenAccent.shade200 : const Color(0xFF2E7D32),
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 12.5,
+                                  fontSize: 13,
                                 ),
                               ),
                             ],
@@ -257,7 +275,7 @@ class _PanofskyStepperState extends State<PanofskyStepper> {
                           const SizedBox(height: 8),
                           Text(
                             guide.modelAnswer,
-                            style: const TextStyle(fontSize: 13, height: 1.45),
+                            style: TextStyle(fontSize: 13.5, height: 1.45, color: isDark ? Colors.white.withOpacity(0.92) : Colors.black87),
                           ),
                         ],
                       ),
@@ -276,48 +294,48 @@ class _PanofskyStepperState extends State<PanofskyStepper> {
           child: Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: Colors.green.shade50.withOpacity(0.7),
+              color: isDark ? const Color(0xFF172C1E) : Colors.green.shade50.withOpacity(0.7),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.green.shade300),
+              border: Border.all(color: isDark ? Colors.green.shade700 : Colors.green.shade300),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    Icon(Icons.verified_user_rounded, color: Colors.green.shade800, size: 20),
+                    Icon(Icons.verified_user_rounded, color: isDark ? Colors.greenAccent.shade200 : Colors.green.shade800, size: 20),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Paso 4: Verificación Histórica (Principios Correctivos)',
                         style: TextStyle(
-                          fontSize: 13.5,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Colors.green.shade900,
+                          color: isDark ? Colors.greenAccent.shade100 : Colors.green.shade900,
                         ),
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 6),
-                const Text(
+                Text(
                   'Para evitar desviaciones subjetivas y anacronismos (Panofsky, 1979):\n'
                   '• Historia del estilo: evalúa cómo se expresaban las formas en la época.\n'
                   '• Historia de los tipos: revisa cómo se representaban temas y alegorías.\n'
                   '• Historia de síntomas culturales: contrasta la obra con la mentalidad y textos coetáneos.',
-                  style: TextStyle(fontSize: 12, height: 1.4),
+                  style: TextStyle(fontSize: 12.5, height: 1.45, color: isDark ? Colors.white.withOpacity(0.9) : Colors.black87),
                 ),
                 const SizedBox(height: 8),
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton.icon(
                     style: TextButton.styleFrom(
-                      foregroundColor: const Color(0xFF5D2E0C),
+                      foregroundColor: isDark ? Theme.of(context).colorScheme.primary : const Color(0xFF5D2E0C),
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     ),
                     onPressed: () => context.push('/study'),
                     icon: const Icon(Icons.menu_book_rounded, size: 16),
-                    label: const Text('Ver Metodología Completa', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                    label: const Text('Ver Metodología Completa', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],

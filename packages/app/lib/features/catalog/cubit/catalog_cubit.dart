@@ -29,7 +29,10 @@ class CatalogCubit extends Cubit<CatalogState> {
         primaryImages: current.primaryImages,
         filterSource: source,
         filterSemaphore: current.filterSemaphore,
+        filterMovement: current.filterMovement,
+        filterArtist: current.filterArtist,
         searchQuery: current.searchQuery,
+        visibleCount: 6,
       ));
     }
   }
@@ -42,7 +45,42 @@ class CatalogCubit extends Cubit<CatalogState> {
         primaryImages: current.primaryImages,
         filterSource: current.filterSource,
         filterSemaphore: semaphore,
+        filterMovement: current.filterMovement,
+        filterArtist: current.filterArtist,
         searchQuery: current.searchQuery,
+        visibleCount: 6,
+      ));
+    }
+  }
+
+  void filterByMovement(String? movement) {
+    if (state is CatalogLoaded) {
+      final current = state as CatalogLoaded;
+      emit(CatalogLoaded(
+        artworks: current.artworks,
+        primaryImages: current.primaryImages,
+        filterSource: current.filterSource,
+        filterSemaphore: current.filterSemaphore,
+        filterMovement: movement,
+        filterArtist: current.filterArtist,
+        searchQuery: current.searchQuery,
+        visibleCount: 6,
+      ));
+    }
+  }
+
+  void filterByArtist(String? artist) {
+    if (state is CatalogLoaded) {
+      final current = state as CatalogLoaded;
+      emit(CatalogLoaded(
+        artworks: current.artworks,
+        primaryImages: current.primaryImages,
+        filterSource: current.filterSource,
+        filterSemaphore: current.filterSemaphore,
+        filterMovement: current.filterMovement,
+        filterArtist: artist,
+        searchQuery: current.searchQuery,
+        visibleCount: 6,
       ));
     }
   }
@@ -55,7 +93,42 @@ class CatalogCubit extends Cubit<CatalogState> {
         primaryImages: current.primaryImages,
         filterSource: current.filterSource,
         filterSemaphore: current.filterSemaphore,
+        filterMovement: current.filterMovement,
+        filterArtist: current.filterArtist,
         searchQuery: query,
+        visibleCount: 6,
+      ));
+    }
+  }
+
+  void loadMoreArtworks() {
+    if (state is CatalogLoaded) {
+      final current = state as CatalogLoaded;
+      emit(CatalogLoaded(
+        artworks: current.artworks,
+        primaryImages: current.primaryImages,
+        filterSource: current.filterSource,
+        filterSemaphore: current.filterSemaphore,
+        filterMovement: current.filterMovement,
+        filterArtist: current.filterArtist,
+        searchQuery: current.searchQuery,
+        visibleCount: current.visibleCount + 6,
+      ));
+    }
+  }
+
+  void resetFilters() {
+    if (state is CatalogLoaded) {
+      final current = state as CatalogLoaded;
+      emit(CatalogLoaded(
+        artworks: current.artworks,
+        primaryImages: current.primaryImages,
+        filterSource: null,
+        filterSemaphore: null,
+        filterMovement: null,
+        filterArtist: null,
+        searchQuery: '',
+        visibleCount: 6,
       ));
     }
   }
