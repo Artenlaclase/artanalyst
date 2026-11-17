@@ -42,6 +42,18 @@ Este documento detalla el historial de cambios técnicos aplicados en el reposit
   * Se incorporaron accesos directos desde la barra del catálogo y desde el visor de análisis (`AnalysisView` y `PanofskyStepper`).
   * En el Nivel 1 del Stepper se incorporó una guía rápida de los 5 pares de Wölfflin, y al pie se añadió la referencia al Paso 4 de Verificación Histórica.
 
+### 1.6. Corrección Definitiva en la Carga de Imágenes (`SmartArtworkImage`)
+* **Problema Identificado:** En entornos web (`localhost:7357`), las tarjetas del catálogo mostraban el placeholder marrón con el icono de paleta debido a que `ArtworkCard` e `AnnotatedViewer` invocaban directamente `Image.network` hacia URLs de Wikimedia Commons, siendo bloqueadas por restricciones de **CORS** del navegador o caídas de certificados SSL locales.
+* **Solución Implementada:**
+  * Se conectó `SmartArtworkImage` tanto en `ArtworkCard` como en `AnnotatedViewer`.
+  * Se configuraron los repositorios (`ArtworkRepository`) para apuntar directamente a los activos locales empaquetados (`assets/images/van_gogh.jpg`, `monet.jpg`, `vermeer.jpg`, `friedrich.jpg`), garantizando una carga instantánea a 0 ms, sin depender de internet ni de políticas externas.
+  * Se agregó fallback con doble resolución de clave (`assets/images/...` y `packages/art_analyst_app/assets/images/...`) para asegurar compatibilidad en ejecución desde la raíz o desde el paquete.
+
+### 1.7. Soporte para Despliegue en la Nube (Vercel), Rutas SPA y Analítica Web
+* **Manejo de Rutas SPA (`vercel.json`):** Las aplicaciones Flutter Web operan como Single Page Applications. Se generó el archivo `vercel.json` con la regla de reescritura `{"source": "/(.*)", "destination": "/index.html"}` para evitar errores 404 cuando el usuario recarga la página o entra directamente a rutas profundas como `/study`, `/catalog` o `/artwork/:id`.
+* **Causa del Error 404 Inicial en Vercel:** Al conectar GitHub con Vercel directamente, Vercel no encontraba la web porque `build/` está en `.gitignore` (no viaja a GitHub) y Vercel no incluye el SDK de Flutter en sus contenedores estándar. Se documentaron las dos soluciones: despliegue de la carpeta compilada mediante CLI (`npx vercel build/web --prod`) y compilación automática mediante script CI/CD (`scripts/vercel_build.sh`).
+* **Integración de Vercel Web Analytics:** Se integró el script nativo de analíticas de Vercel (`/_vercel/insights/script.js`) en `web/index.html`, `packages/app/web/index.html` y `build/web/index.html` para monitorear visitas y páginas vistas sin impacto en el rendimiento.
+
 ---
 
 ## 2. Catálogo de Funcionalidades Implementadas
@@ -140,10 +152,27 @@ build/
 # Volúmenes persistentes de bases de datos Docker
 postgres_data/
 redis_data/
+
+# Enlace y credenciales de despliegue en Vercel
+.vercel/
+
+# Documentación interna
+ACTUALIZACIONES_Y_FUNCIONALIDADES.md
 ```
 
-### Justificación de las exclusiones:
-1. **`.dart_tool/`, `.packages`, `.pub_cache/`, `build/`:** Carpetas de compilación y caché de dependencias descargadas por `flutter pub get`. Son regeneradas automáticamente en cada entorno.
-2. **`*.lock`:** En bibliotecas y monorepos, se omite para permitir la resolución flexible de versiones compatibles.
-3. **`postgres_data/` y `redis_data/`:** Carpetas donde Docker monta los volúmenes locales de almacenamiento de PostgreSQL y Redis para evitar guardar datos binarios pesados en el historial de Git.
-4. **`.env*`:** Protege tokens, contraseñas de base de datos o claves API privadas de ser expuestas públicamente.
+### Justificación detallada de las exclusiones:
+1. **Artefactos de compilación (`build/`, `.dart_tool/`, `.packages`, `.pub_cache/`):**
+   * Son regenerados automáticamente por Flutter al compilar.
+   * **Relación con Vercel:** La carpeta `build/` contiene cientos de megabytes de binarios compilados que no deben subirse a Git. Debido a esto, al conectar Vercel directamente con GitHub, Vercel no encuentra `build/web` a menos que se configure el comando de compilación con Flutter (`scripts/vercel_build.sh`) o se despliegue directamente la carpeta compilada desde la terminal (`npx vercel build/web --prod`).
+2. **Archivos de IDE y sistema (`.vscode/`, `.idea/`, `*.iml`, `*.class`, `*.log`, `.DS_Store`):**
+   * Evitan colisiones de preferencias de editor entre diferentes desarrolladores o sistemas operativos (Windows / macOS / Linux).
+3. **`*.lock`:**
+   * En bibliotecas y esquemas monorepo desacoplados, se omite para permitir la resolución flexible de versiones compatibles de paquetes.
+4. **Almacenamiento persistente de Docker (`postgres_data/`, `redis_data/`):**
+   * Carpetas donde Docker monta los volúmenes locales de almacenamiento físico de PostgreSQL y Redis, impidiendo almacenar bases de datos binarias pesadas en el repositorio.
+5. **Variables de entorno y secretos (`.env`, `.env.*`):**
+   * Medida de seguridad esencial para evitar exponer tokens, contraseñas de base de datos o credenciales de servicios en repositorios públicos.
+6. **Caché y enlace de Vercel (`.vercel/`):**
+   * Almacena identificadores del proyecto local y tokens de sesión de Vercel CLI que son propios del entorno del desarrollador.
+7. **Documentación interna (`ACTUALIZACIONES_Y_FUNCIONALIDADES.md`):**
+   * Registro técnico de cambios y arquitectura para consulta local sin interferir en los despliegues de producción.
