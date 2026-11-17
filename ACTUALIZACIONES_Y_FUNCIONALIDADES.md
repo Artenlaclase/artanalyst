@@ -130,6 +130,22 @@ Este documento detalla el historial de cambios técnicos aplicados en el reposit
   * Inclusión de las 20 fichas de autorretratos con resolución de imágenes verificadas de Wikimedia Commons y museos internacionales.
   * Modelos de guía Panofsky específicos para cada uno de los 20 autorretratos en sus 3 niveles (Formal, Iconográfico e Iconológico).
 
+### 1.14. Optimización de Interfaz Móvil: Menú Desplegable de Filtros y Priorización Visual de la Obra de Arte
+* **Detección del Problema en Pantallas Móviles:**
+  * En dispositivos móviles, la acumulación simultánea de la barra de búsqueda, tres filas horizontales completas de chips de filtrado (Movimiento, Artista, Semáforo) y dos banners informativos voluminosos consumía más del 65% del alto visible de la pantalla, dejando únicamente visible una mínima franja del marco superior de la primera obra de arte.
+* **Menú Desplegable Plegable y Animado (`_isFiltersExpanded`):**
+  * Se rediseñó la barra superior de `CatalogView` a una altura ultracompacta (~48 px), integrando el campo de búsqueda con un botón desplegable con icono de afinación (`Icons.tune_rounded`), contador dinámico de filtros activos (`Filtros (N)`) e indicador de flecha desplegable.
+  * Al pulsar el botón, se despliega suavemente un contenedor con diseño de tarjeta que reúne:
+    1. Selector de Movimiento Estético (11 movimientos artísticos).
+    2. Selector de Artista (25 artistas clave).
+    3. Selector de Semáforo Legal (Dominio Público, Creative Commons y Derechos Reservados).
+    4. Botón rápido *"Limpiar todo"* y botón de cierre *"Cerrar menú y ver N obras"*.
+* **Eliminación de Banners Redundantes:**
+  * Se removieron los banners fijos de la cabecera del catálogo, ya que tanto la sesión especial de autorretratos como la guía metodológica de movimientos cuentan con accesos directos persistentes en la barra de navegación inferior (`NavigationBar`) y superior (`AppBar`).
+* **Mayor Tamaño y Protagonismo de la Imagen en `ArtworkCard`:**
+  * Se incrementó la proporción dedicada a la imagen de la obra (`flex: 6` frente a `flex: 4` de ficha técnica) y la relación de aspecto (`aspectRatio: 0.95` en móvil).
+  * Ahora, al entrar al catálogo desde un celular, la obra de arte ocupa de inmediato el centro de la pantalla en alta resolución y con total claridad.
+
 ---
 
 ## 2. Catálogo de Funcionalidades Implementadas
