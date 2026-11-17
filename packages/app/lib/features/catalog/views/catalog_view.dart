@@ -22,6 +22,11 @@ class CatalogView extends StatelessWidget {
         ),
         actions: [
           IconButton(
+            tooltip: 'Sesión: 20 Autorretratos en Dominio Público',
+            icon: const Icon(Icons.face_retouching_natural_rounded),
+            onPressed: () => context.go('/session/self-portraits'),
+          ),
+          IconButton(
             tooltip: 'Guía Metodológica y Estudio de Arte',
             icon: const Icon(Icons.auto_stories_rounded),
             onPressed: () => context.go('/study'),
