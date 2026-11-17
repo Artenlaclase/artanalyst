@@ -78,7 +78,17 @@ class SmartArtworkImage extends StatelessWidget {
         width: width,
         height: height,
         cacheWidth: cacheWidth,
-        errorBuilder: (context, error, stackTrace) => _buildFallback(context),
+        errorBuilder: (context, error, stackTrace) {
+          return Image.asset(
+            url,
+            package: 'art_analyst_app',
+            fit: fit,
+            width: width,
+            height: height,
+            cacheWidth: cacheWidth,
+            errorBuilder: (context2, error2, stackTrace2) => _buildFallback(context),
+          );
+        },
       );
     }
 
