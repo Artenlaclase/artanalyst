@@ -47,8 +47,18 @@ class SmartArtworkImage extends StatelessWidget {
         height: height,
         cacheWidth: cacheWidth,
         errorBuilder: (context, error, stackTrace) {
-          // Si el activo local fallara por alguna razón, usar la URL de red
-          return _buildFromUrl(context, imageUrl);
+          // Intentar con la clave de paquete si se ejecuta desde monorepo
+          return Image.asset(
+            localAsset,
+            package: 'art_analyst_app',
+            fit: fit,
+            width: width,
+            height: height,
+            cacheWidth: cacheWidth,
+            errorBuilder: (context2, error2, stackTrace2) {
+              return _buildFromUrl(context, imageUrl);
+            },
+          );
         },
       );
     }
