@@ -104,6 +104,32 @@ Este documento detalla el historial de cambios técnicos aplicados en el reposit
   * *El beso* (Gustav Klimt, Modernismo/Secesión).
 * **Vinculación con Licencias TASL y Fuentes:** Cada obra incluye metadatos de conservación, procedencia museográfica (The Met, Cleveland Museum of Art, Rijksmuseum, British Museum, Wikimedia Commons) y estado de semáforo legal.
 
+### 1.13. Implementación de la Sesión Pedagógica Especial: "20 Autorretratos en Dominio Público"
+* **Auditoría Legal Exhaustiva de 31 Autorretratos Fundamentales:**
+  * Se auditó la selección curricular `100Autorretratos.docx` bajo el Convenio de Berna y la regla internacional de 70–80 años *post mortem auctoris* (p.m.a.).
+  * Se determinó que **20 autorretratos** pertenecen plenamente al **Dominio Público (🟢 Semáforo Verde)** y pueden ser utilizados, proyectados y analizados sin restricciones ni regalías.
+  * Se descartaron **11 obras protegidas por derechos vigentes o correspondientes a artistas vivos** (Frida Kahlo, Picasso, Chagall, Dalí, Lempicka, Warhol, Basquiat, Sherman, Kusama, Abramović).
+* **Nueva Ruta y Vista Especializada (`/session/self-portraits` - `SelfPortraitsSessionView`):**
+  * Vista interactiva con 3 pestañas pedagógicas:
+    1. **Galería de los 20 Autorretratos:** Grid responsivo con filtrado dinámico por época/movimiento (Renacimiento, Manierismo, Barroco, Rococó, Romanticismo, Realismo, Impresionismo, Postimpresionismo, Expresionismo), badges de Dominio Público, focos de análisis visual del lenguaje artístico y botón directo *"Analizar en Visor Panofsky"*.
+    2. **Ruta de las 4 Estaciones de Aprendizaje:**
+       * *Estación 1 (Renacimiento & Barroco):* La afirmación profesional de la mujer artista (*Sofonisba Anguissola* y *Artemisia Gentileschi*).
+       * *Estación 2 (Barroco & Romanticismo):* El claroscuro psicológico y la mirada introspectiva (*Rembrandt van Rijn* y *Francisco de Goya*).
+       * *Estación 3 (Postimpresionismo & Simbolismo):* La pincelada expresiva y el color arbitrario (*Vincent van Gogh* y *Paul Gauguin*).
+       * *Estación 4 (Realismo & Expresionismo):* La tensión expresionista de la línea y el cuerpo (*Egon Schiele* y *Gustave Courbet*).
+       * Cada estación incluye los pares de Wölfflin correspondientes y preguntas de alto orden cognitivo estructuradas rigurosamente según la **Fórmula de las 4 Partes**: `[Disparador abierto] + [Verbo de habilidad] + [Contenido técnico] + [Contexto del alumno]`.
+    3. **Taller Creativo & Rúbrica Formativa:**
+       * Pauta para el trabajo práctico estudiantil *"Mi Autorretrato Intencionado"*, ofreciendo 3 estrategias técnicas (Claroscuro, Color Subjetivo y Línea Expresiva).
+       * Ficha conceptual de reflexión en 3 preguntas al reverso.
+       * Rúbrica formativa analítica con 4 niveles de desempeño (Destacado, Competente, Básico, Inicial) evaluando análisis formal, cognición alta, intención plástica y conciencia de propiedad intelectual.
+* **Integración en Navegación y Catálogo:**
+  * Nuevo destino permanente **"Autorretratos"** en el `NavigationRail` (escritorio/web) y en el `NavigationBar` (móvil).
+  * Banner visual prominente al inicio del catálogo principal con acceso con un solo clic.
+  * Tarjeta de acceso directo en la guía de estudio (`/study`).
+* **Expansión del Repositorio (`ArtworkRepository`):**
+  * Inclusión de las 20 fichas de autorretratos con resolución de imágenes verificadas de Wikimedia Commons y museos internacionales.
+  * Modelos de guía Panofsky específicos para cada uno de los 20 autorretratos en sus 3 niveles (Formal, Iconográfico e Iconológico).
+
 ---
 
 ## 2. Catálogo de Funcionalidades Implementadas
