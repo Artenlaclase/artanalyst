@@ -272,6 +272,7 @@ for m in meta:
     u = urls.get(k, {})
     thumb = u.get('thumb', '')
     full = u.get('full', thumb)
+    escaped_museum = m["museum"].replace("'", "\\'")
     dart_code += f'''    '{m["id"]}': const ArtworkImage(
       id: 'img-{k}',
       artworkId: '{m["id"]}',
@@ -279,7 +280,7 @@ for m in meta:
       thumbnailUrl: '{thumb}',
       licenseType: LicenseType.publicDomainMark,
       licenseUri: 'https://creativecommons.org/publicdomain/mark/1.0/',
-      attributionText: '"{m["title"]}" por {m["artist"]} ({m["year"]}). {m["museum"]}. Dominio Público Internacional.',
+      attributionText: '"{m["title"]}" por {m["artist"]} ({m["year"]}). {escaped_museum}. Dominio Público Internacional.',
       isWorldwide: true,
       semaphoreColor: LicenseSemaphore.green,
     ),
