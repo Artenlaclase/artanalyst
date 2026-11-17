@@ -32,7 +32,7 @@ class ArtworkCard extends StatelessWidget {
           children: [
             // Artwork Image / Red placeholder banner
             Expanded(
-              flex: 5,
+              flex: 6,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
