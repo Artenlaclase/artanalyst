@@ -8,6 +8,7 @@ import 'package:art_analyst_app/features/analysis/views/analysis_view.dart';
 import 'package:art_analyst_app/features/analysis/cubit/analysis_cubit.dart';
 import 'package:art_analyst_app/features/guide/views/license_guide_view.dart';
 import 'package:art_analyst_app/features/study/views/study_view.dart';
+import 'package:art_analyst_app/features/session/views/self_portraits_session_view.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
@@ -56,6 +57,14 @@ class AppRouter {
               },
             ),
             GoRoute(
+              path: '/session/self-portraits',
+              builder: (context, state) {
+                final tabStr = state.uri.queryParameters['tab'];
+                final tab = int.tryParse(tabStr ?? '0') ?? 0;
+                return SelfPortraitsSessionView(initialTab: tab);
+              },
+            ),
+            GoRoute(
               path: '/licenses-guide',
               builder: (context, state) => const LicenseGuideView(),
             ),
@@ -74,9 +83,10 @@ class ScaffoldWithNavigation extends StatelessWidget {
 
   int _calculateSelectedIndex(BuildContext context) {
     final location = GoRouterState.of(context).uri.path;
+    if (location.startsWith('/session/self-portraits')) return 1;
+    if (location.startsWith('/study')) return 2;
+    if (location.startsWith('/licenses-guide')) return 3;
     if (location.startsWith('/catalog') || location.startsWith('/artwork')) return 0;
-    if (location.startsWith('/study')) return 1;
-    if (location.startsWith('/licenses-guide')) return 2;
     return 0;
   }
 
@@ -88,9 +98,12 @@ class ScaffoldWithNavigation extends StatelessWidget {
         context.go('/catalog');
         break;
       case 1:
-        context.go('/study');
+        context.go('/session/self-portraits');
         break;
       case 2:
+        context.go('/study');
+        break;
+      case 3:
         context.go('/licenses-guide');
         break;
     }
@@ -122,6 +135,11 @@ class ScaffoldWithNavigation extends StatelessWidget {
                       label: Text('Catálogo'),
                     ),
                     NavigationRailDestination(
+                      icon: Icon(Icons.face_retouching_natural_rounded),
+                      selectedIcon: Icon(Icons.portrait_rounded),
+                      label: Text('Autorretratos'),
+                    ),
+                    NavigationRailDestination(
                       icon: Icon(Icons.auto_stories_outlined),
                       selectedIcon: Icon(Icons.auto_stories_rounded),
                       label: Text('Estudio'),
@@ -149,6 +167,10 @@ class ScaffoldWithNavigation extends StatelessWidget {
               NavigationDestination(
                 icon: Icon(Icons.grid_view_rounded),
                 label: 'Catálogo',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.face_retouching_natural_rounded),
+                label: 'Autorretratos',
               ),
               NavigationDestination(
                 icon: Icon(Icons.auto_stories_outlined),

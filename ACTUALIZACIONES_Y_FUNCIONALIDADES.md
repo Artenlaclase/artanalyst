@@ -42,6 +42,94 @@ Este documento detalla el historial de cambios técnicos aplicados en el reposit
   * Se incorporaron accesos directos desde la barra del catálogo y desde el visor de análisis (`AnalysisView` y `PanofskyStepper`).
   * En el Nivel 1 del Stepper se incorporó una guía rápida de los 5 pares de Wölfflin, y al pie se añadió la referencia al Paso 4 de Verificación Histórica.
 
+### 1.6. Corrección Definitiva en la Carga de Imágenes (`SmartArtworkImage`)
+* **Problema Identificado:** En entornos web (`localhost:7357`), las tarjetas del catálogo mostraban el placeholder marrón con el icono de paleta debido a que `ArtworkCard` e `AnnotatedViewer` invocaban directamente `Image.network` hacia URLs de Wikimedia Commons, siendo bloqueadas por restricciones de **CORS** del navegador o caídas de certificados SSL locales.
+* **Solución Implementada:**
+  * Se conectó `SmartArtworkImage` tanto en `ArtworkCard` como en `AnnotatedViewer`.
+  * Se configuraron los repositorios (`ArtworkRepository`) para apuntar directamente a los activos locales empaquetados (`assets/images/van_gogh.jpg`, `monet.jpg`, `vermeer.jpg`, `friedrich.jpg`), garantizando una carga instantánea a 0 ms, sin depender de internet ni de políticas externas.
+  * Se agregó fallback con doble resolución de clave (`assets/images/...` y `packages/art_analyst_app/assets/images/...`) para asegurar compatibilidad en ejecución desde la raíz o desde el paquete.
+
+### 1.7. Soporte para Despliegue en la Nube (Vercel), Rutas SPA y Analítica Web
+* **Manejo de Rutas SPA (`vercel.json`):** Las aplicaciones Flutter Web operan como Single Page Applications. Se generó el archivo `vercel.json` con la regla de reescritura `{"source": "/(.*)", "destination": "/index.html"}` para evitar errores 404 cuando el usuario recarga la página o entra directamente a rutas profundas como `/study`, `/catalog` o `/artwork/:id`.
+* **Causa del Error 404 Inicial en Vercel:** Al conectar GitHub con Vercel directamente, Vercel no encontraba la web porque `build/` está en `.gitignore` (no viaja a GitHub) y Vercel no incluye el SDK de Flutter en sus contenedores estándar. Se documentaron las dos soluciones: despliegue de la carpeta compilada mediante CLI (`npx vercel build/web --prod`) y compilación automática mediante script CI/CD (`scripts/vercel_build.sh`).
+* **Integración de Vercel Web Analytics:** Se integró el script nativo de analíticas de Vercel (`/_vercel/insights/script.js`) en `web/index.html`, `packages/app/web/index.html` y `build/web/index.html` para monitorear visitas y páginas vistas sin impacto en el rendimiento.
+
+### 1.8. Corrección de Legibilidad y Tipografía Móvil en Modo Oscuro
+* **Detección del Problema en Dispositivos Móviles:** Mediante capturas de pantalla de un smartphone navegando en `artanalyst.vercel.app/#/study` bajo Modo Oscuro, se detectó que los contenedores de texto poseían fondos fijos claros (`Colors.white`, `Colors.grey.shade50`) mientras el tema global aplicaba texto blanco/crema por defecto, provocando texto invisible o con pésimo contraste. Asimismo, el tamaño de letra (11–13px) resultaba pequeño e incómodo de leer en celulares.
+* **Solución de Contraste Adaptable al Tema (`isDark`):** Se refactorizaron completamente `StudyView` (`study_view.dart`) y el stepper interactivo de Panofsky (`panofsky_stepper.dart`), implementando selectores automáticos de color basados en `final isDark = Theme.of(context).brightness == Brightness.dark;`:
+  * En Modo Oscuro se emplean fondos profundos cálidos (`#1E1B18`, `#241E19`, `#1E2A38`, `#142E1C`) con bordes atenuados y tipografías en blanco/crema de alta legibilidad (`Colors.white.withOpacity(0.92)`).
+  * En Modo Claro se mantienen tonos suaves con texto oscuro (`Colors.black87`).
+* **Incremento de Tipografía y Espaciado Móvil:**
+  * Títulos de sección: aumentados a 18–22px con negrita (`FontWeight.bold`).
+  * Subtítulos y preguntas guía: aumentados a 14–16px.
+  * Texto de párrafos y citas metodológicas: aumentados a 14.5–16px con interlineado holgado (`height: 1.5–1.55`) para lectura fluida.
+* **Tarjetas Sinópticas Adaptables vs. Tabla Rígida:** Se reemplazó el `DataTable` horizontal (que sufría desbordamiento horizontal en celulares) por tarjetas verticales modulares (`_buildSinopticCard`) que presentan el nivel, objeto de interpretación, acto de interpretación y principio correctivo en formato vertical perfectamente adaptado a cualquier pantalla de móvil.
+
+### 1.9. Scroll Infinito y Carga Progresiva en el Catálogo
+* **Arquitectura de Carga Progresiva:** En `CatalogState` y `CatalogCubit` se introdujo el manejo de paginación reactiva (`visibleCount`, `pagedArtworks`, `hasMoreToLoad`, `totalMatchingCount`).
+* **Scroll Continuo:** `CatalogView` escucha eventos de desplazamiento con `NotificationListener<ScrollNotification>`. Cuando el usuario se aproxima al 90% del scroll vertical, la aplicación solicita automáticamente el siguiente lote de obras maestras.
+* **Control Visual y Contador Dinámico:** Se incorporó al pie del catálogo un botón interactivo *"Cargar más obras maestras"* junto a un contador en tiempo real (*"Mostrando X de Y obras maestras"*), permitiendo navegar grandes colecciones sin sobrecargar la memoria del navegador.
+
+### 1.10. Búsqueda y Filtros Avanzados por Artista y Movimiento Artístico
+* **Filtros Específicos por Artista:** Fila de chips de desplazamiento horizontal que permite filtrar al instante por artistas destacados (Van Gogh, Monet, Vermeer, Caspar David Friedrich, Leonardo da Vinci, Rembrandt, Francisco de Goya, Sandro Botticelli, Edgar Degas, Paul Cézanne, Katsushika Hokusai, Edvard Munch, Gustav Klimt).
+* **Filtros Específicos por Movimiento:** Chips dedicados para filtrar por época o escuela estética (Renacimiento, Barroco, Romanticismo, Impresionismo, Postimpresionismo, Expresionismo, Ukiyo-e, Modernismo).
+* **Búsqueda Global Unificada:** El campo de búsqueda principal ahora busca en simultáneo por título de la obra, nombre del artista y movimiento estético.
+* **Botón de Limpieza Rápida:** Acceso rápido para restablecer todos los filtros y volver a la vista completa del catálogo con un solo clic.
+
+### 1.11. Nueva Sección Metodológica: "Movimientos & Exponentes" (7 Corrientes y 1–2 Exponentes Clave)
+* **Pestaña 4 en la Guía de Estudio (`StudyView`):** Módulo pedagógico exhaustivo que sintetiza las corrientes estéticas de mayor impacto en la historia del arte:
+  1. **Renacimiento:** Leonardo da Vinci (*La Gioconda*) y Sandro Botticelli (*El nacimiento de Venus*).
+  2. **Barroco:** Johannes Vermeer (*La joven de la perla*) y Rembrandt van Rijn (*La ronda de noche*).
+  3. **Romanticismo:** Caspar David Friedrich (*El caminante sobre el mar de nubes*) y Francisco de Goya (*El 3 de mayo en Madrid*).
+  4. **Impresionismo:** Claude Monet (*Nenúfares*) y Edgar Degas (*La clase de danza*).
+  5. **Postimpresionismo:** Vincent van Gogh (*Autorretrato con sombrero de paja*) y Paul Cézanne (*Los jugadores de cartas*).
+  6. **Vanguardias / Expresionismo:** Edvard Munch (*El grito*) y Pablo Picasso (*Las señoritas de Aviñón*).
+  7. **Arte Oriental / Ukiyo-e:** Katsushika Hokusai (*La gran ola de Kanagawa*).
+* **Estructura Didáctica por Movimiento:**
+  * Período histórico y contexto sociocultural.
+  * **Fórmula Óptica de Wölfflin:** Explicación concreta de qué pares contrapuestos rigen la visión del movimiento (ej. Lineal vs. Pictórico, Superficie vs. Profundidad, Forma Abierta vs. Cerrada).
+  * Ficha biográfica sintética del exponente (años de vida, nacionalidad, aporte revolucionario y obra cumbre).
+  * Botón interactivo de integración directa: *"Explorar obras de este movimiento en el Catálogo"*, que redirige al catálogo y activa el filtro correspondiente en un toque.
+
+### 1.12. Ampliación Curada del Repositorio de Obras Maestras
+* **Expansión a 15 Obras Maestras Representativas (`ArtworkRepository`):** Se añadieron fichas técnicas y modelos de análisis pedagógico para obras cumbre de los movimientos citados:
+  * *La Gioconda* (Leonardo da Vinci, Renacimiento).
+  * *El nacimiento de Venus* (Sandro Botticelli, Renacimiento).
+  * *La ronda de noche* (Rembrandt, Barroco).
+  * *El 3 de mayo en Madrid* (Francisco de Goya, Romanticismo).
+  * *La clase de danza* (Edgar Degas, Impresionismo).
+  * *Los jugadores de cartas* (Paul Cézanne, Postimpresionismo).
+  * *La gran ola de Kanagawa* (Katsushika Hokusai, Ukiyo-e).
+  * *El grito* (Edvard Munch, Expresionismo).
+  * *El beso* (Gustav Klimt, Modernismo/Secesión).
+* **Vinculación con Licencias TASL y Fuentes:** Cada obra incluye metadatos de conservación, procedencia museográfica (The Met, Cleveland Museum of Art, Rijksmuseum, British Museum, Wikimedia Commons) y estado de semáforo legal.
+
+### 1.13. Implementación de la Sesión Pedagógica Especial: "20 Autorretratos en Dominio Público"
+* **Auditoría Legal Exhaustiva de 31 Autorretratos Fundamentales:**
+  * Se auditó la selección curricular `100Autorretratos.docx` bajo el Convenio de Berna y la regla internacional de 70–80 años *post mortem auctoris* (p.m.a.).
+  * Se determinó que **20 autorretratos** pertenecen plenamente al **Dominio Público (🟢 Semáforo Verde)** y pueden ser utilizados, proyectados y analizados sin restricciones ni regalías.
+  * Se descartaron **11 obras protegidas por derechos vigentes o correspondientes a artistas vivos** (Frida Kahlo, Picasso, Chagall, Dalí, Lempicka, Warhol, Basquiat, Sherman, Kusama, Abramović).
+* **Nueva Ruta y Vista Especializada (`/session/self-portraits` - `SelfPortraitsSessionView`):**
+  * Vista interactiva con 3 pestañas pedagógicas:
+    1. **Galería de los 20 Autorretratos:** Grid responsivo con filtrado dinámico por época/movimiento (Renacimiento, Manierismo, Barroco, Rococó, Romanticismo, Realismo, Impresionismo, Postimpresionismo, Expresionismo), badges de Dominio Público, focos de análisis visual del lenguaje artístico y botón directo *"Analizar en Visor Panofsky"*.
+    2. **Ruta de las 4 Estaciones de Aprendizaje:**
+       * *Estación 1 (Renacimiento & Barroco):* La afirmación profesional de la mujer artista (*Sofonisba Anguissola* y *Artemisia Gentileschi*).
+       * *Estación 2 (Barroco & Romanticismo):* El claroscuro psicológico y la mirada introspectiva (*Rembrandt van Rijn* y *Francisco de Goya*).
+       * *Estación 3 (Postimpresionismo & Simbolismo):* La pincelada expresiva y el color arbitrario (*Vincent van Gogh* y *Paul Gauguin*).
+       * *Estación 4 (Realismo & Expresionismo):* La tensión expresionista de la línea y el cuerpo (*Egon Schiele* y *Gustave Courbet*).
+       * Cada estación incluye los pares de Wölfflin correspondientes y preguntas de alto orden cognitivo estructuradas rigurosamente según la **Fórmula de las 4 Partes**: `[Disparador abierto] + [Verbo de habilidad] + [Contenido técnico] + [Contexto del alumno]`.
+    3. **Taller Creativo & Rúbrica Formativa:**
+       * Pauta para el trabajo práctico estudiantil *"Mi Autorretrato Intencionado"*, ofreciendo 3 estrategias técnicas (Claroscuro, Color Subjetivo y Línea Expresiva).
+       * Ficha conceptual de reflexión en 3 preguntas al reverso.
+       * Rúbrica formativa analítica con 4 niveles de desempeño (Destacado, Competente, Básico, Inicial) evaluando análisis formal, cognición alta, intención plástica y conciencia de propiedad intelectual.
+* **Integración en Navegación y Catálogo:**
+  * Nuevo destino permanente **"Autorretratos"** en el `NavigationRail` (escritorio/web) y en el `NavigationBar` (móvil).
+  * Banner visual prominente al inicio del catálogo principal con acceso con un solo clic.
+  * Tarjeta de acceso directo en la guía de estudio (`/study`).
+* **Expansión del Repositorio (`ArtworkRepository`):**
+  * Inclusión de las 20 fichas de autorretratos con resolución de imágenes verificadas de Wikimedia Commons y museos internacionales.
+  * Modelos de guía Panofsky específicos para cada uno de los 20 autorretratos en sus 3 niveles (Formal, Iconográfico e Iconológico).
+
 ---
 
 ## 2. Catálogo de Funcionalidades Implementadas
@@ -140,10 +228,27 @@ build/
 # Volúmenes persistentes de bases de datos Docker
 postgres_data/
 redis_data/
+
+# Enlace y credenciales de despliegue en Vercel
+.vercel/
+
+# Documentación interna
+ACTUALIZACIONES_Y_FUNCIONALIDADES.md
 ```
 
-### Justificación de las exclusiones:
-1. **`.dart_tool/`, `.packages`, `.pub_cache/`, `build/`:** Carpetas de compilación y caché de dependencias descargadas por `flutter pub get`. Son regeneradas automáticamente en cada entorno.
-2. **`*.lock`:** En bibliotecas y monorepos, se omite para permitir la resolución flexible de versiones compatibles.
-3. **`postgres_data/` y `redis_data/`:** Carpetas donde Docker monta los volúmenes locales de almacenamiento de PostgreSQL y Redis para evitar guardar datos binarios pesados en el historial de Git.
-4. **`.env*`:** Protege tokens, contraseñas de base de datos o claves API privadas de ser expuestas públicamente.
+### Justificación detallada de las exclusiones:
+1. **Artefactos de compilación (`build/`, `.dart_tool/`, `.packages`, `.pub_cache/`):**
+   * Son regenerados automáticamente por Flutter al compilar.
+   * **Relación con Vercel:** La carpeta `build/` contiene cientos de megabytes de binarios compilados que no deben subirse a Git. Debido a esto, al conectar Vercel directamente con GitHub, Vercel no encuentra `build/web` a menos que se configure el comando de compilación con Flutter (`scripts/vercel_build.sh`) o se despliegue directamente la carpeta compilada desde la terminal (`npx vercel build/web --prod`).
+2. **Archivos de IDE y sistema (`.vscode/`, `.idea/`, `*.iml`, `*.class`, `*.log`, `.DS_Store`):**
+   * Evitan colisiones de preferencias de editor entre diferentes desarrolladores o sistemas operativos (Windows / macOS / Linux).
+3. **`*.lock`:**
+   * En bibliotecas y esquemas monorepo desacoplados, se omite para permitir la resolución flexible de versiones compatibles de paquetes.
+4. **Almacenamiento persistente de Docker (`postgres_data/`, `redis_data/`):**
+   * Carpetas donde Docker monta los volúmenes locales de almacenamiento físico de PostgreSQL y Redis, impidiendo almacenar bases de datos binarias pesadas en el repositorio.
+5. **Variables de entorno y secretos (`.env`, `.env.*`):**
+   * Medida de seguridad esencial para evitar exponer tokens, contraseñas de base de datos o credenciales de servicios en repositorios públicos.
+6. **Caché y enlace de Vercel (`.vercel/`):**
+   * Almacena identificadores del proyecto local y tokens de sesión de Vercel CLI que son propios del entorno del desarrollador.
+7. **Documentación interna (`ACTUALIZACIONES_Y_FUNCIONALIDADES.md`):**
+   * Registro técnico de cambios y arquitectura para consulta local sin interferir en los despliegues de producción.

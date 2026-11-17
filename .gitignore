@@ -36,4 +36,9 @@ build/
 # Docker volumes
 postgres_data/
 redis_data/
+
+# Vercel deployment cache
+.vercel/
+
+# Documentación interna
 ACTUALIZACIONES_Y_FUNCIONALIDADES.md
