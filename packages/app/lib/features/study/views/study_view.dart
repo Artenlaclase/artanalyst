@@ -142,42 +142,6 @@ class _StudyViewState extends State<StudyView> with SingleTickerProviderStateMix
               ),
             ),
 
-            const SizedBox(height: 16),
-            InkWell(
-              onTap: () => context.go('/session/self-portraits'),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: isDark ? const Color(0xFF2E2018) : const Color(0xFFFFF3E0),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF8B4513).withOpacity(0.4)),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.face_retouching_natural_rounded, color: Color(0xFF8B4513), size: 28),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Sesión Aplicada: 20 Autorretratos en Dominio Público',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.5),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            'Aplica este método paso a paso con las 4 estaciones de aprendizaje y la Fórmula de las 4 Partes.',
-                            style: TextStyle(fontSize: 12.5, color: isDark ? Colors.white70 : Colors.black87),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Color(0xFF8B4513)),
-                  ],
-                ),
-              ),
-            ),
-
             const SizedBox(height: 24),
 
             // PASO 1
@@ -294,42 +258,6 @@ class _StudyViewState extends State<StudyView> with SingleTickerProviderStateMix
               ),
             ),
 
-            const SizedBox(height: 16),
-            InkWell(
-              onTap: () => context.go('/session/self-portraits'),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: isDark ? const Color(0xFF2E2018) : const Color(0xFFFFF3E0),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF8B4513).withOpacity(0.4)),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.face_retouching_natural_rounded, color: Color(0xFF8B4513), size: 28),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Sesión Aplicada: 20 Autorretratos en Dominio Público',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.5),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            'Aplica este método paso a paso con las 4 estaciones de aprendizaje y la Fórmula de las 4 Partes.',
-                            style: TextStyle(fontSize: 12.5, color: isDark ? Colors.white70 : Colors.black87),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Color(0xFF8B4513)),
-                  ],
-                ),
-              ),
-            ),
-
             const SizedBox(height: 24),
 
             // PASO 2
@@ -368,42 +296,6 @@ class _StudyViewState extends State<StudyView> with SingleTickerProviderStateMix
                     bookRef: 'Panofsky, Erwin: El significado en las artes visuales (1979)',
                   ),
                 ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
-            InkWell(
-              onTap: () => context.go('/session/self-portraits'),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: isDark ? const Color(0xFF2E2018) : const Color(0xFFFFF3E0),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF8B4513).withOpacity(0.4)),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.face_retouching_natural_rounded, color: Color(0xFF8B4513), size: 28),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Sesión Aplicada: 20 Autorretratos en Dominio Público',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.5),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            'Aplica este método paso a paso con las 4 estaciones de aprendizaje y la Fórmula de las 4 Partes.',
-                            style: TextStyle(fontSize: 12.5, color: isDark ? Colors.white70 : Colors.black87),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Color(0xFF8B4513)),
-                  ],
-                ),
               ),
             ),
 
@@ -452,42 +344,6 @@ class _StudyViewState extends State<StudyView> with SingleTickerProviderStateMix
                     bookRef: 'Panofsky, Erwin: El significado en las artes visuales (1979)',
                   ),
                 ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
-            InkWell(
-              onTap: () => context.go('/session/self-portraits'),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: isDark ? const Color(0xFF2E2018) : const Color(0xFFFFF3E0),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF8B4513).withOpacity(0.4)),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.face_retouching_natural_rounded, color: Color(0xFF8B4513), size: 28),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Sesión Aplicada: 20 Autorretratos en Dominio Público',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.5),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            'Aplica este método paso a paso con las 4 estaciones de aprendizaje y la Fórmula de las 4 Partes.',
-                            style: TextStyle(fontSize: 12.5, color: isDark ? Colors.white70 : Colors.black87),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Color(0xFF8B4513)),
-                  ],
-                ),
               ),
             ),
 
@@ -768,42 +624,6 @@ class _StudyViewState extends State<StudyView> with SingleTickerProviderStateMix
               ),
             ),
 
-            const SizedBox(height: 16),
-            InkWell(
-              onTap: () => context.go('/session/self-portraits'),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: isDark ? const Color(0xFF2E2018) : const Color(0xFFFFF3E0),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF8B4513).withOpacity(0.4)),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.face_retouching_natural_rounded, color: Color(0xFF8B4513), size: 28),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Sesión Aplicada: 20 Autorretratos en Dominio Público',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.5),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            'Aplica este método paso a paso con las 4 estaciones de aprendizaje y la Fórmula de las 4 Partes.',
-                            style: TextStyle(fontSize: 12.5, color: isDark ? Colors.white70 : Colors.black87),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Color(0xFF8B4513)),
-                  ],
-                ),
-              ),
-            ),
-
             const SizedBox(height: 24),
 
             ...movementsData.map((mov) {
@@ -1067,42 +887,6 @@ class _StudyViewState extends State<StudyView> with SingleTickerProviderStateMix
               ),
             ),
 
-            const SizedBox(height: 16),
-            InkWell(
-              onTap: () => context.go('/session/self-portraits'),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: isDark ? const Color(0xFF2E2018) : const Color(0xFFFFF3E0),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF8B4513).withOpacity(0.4)),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.face_retouching_natural_rounded, color: Color(0xFF8B4513), size: 28),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Sesión Aplicada: 20 Autorretratos en Dominio Público',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.5),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            'Aplica este método paso a paso con las 4 estaciones de aprendizaje y la Fórmula de las 4 Partes.',
-                            style: TextStyle(fontSize: 12.5, color: isDark ? Colors.white70 : Colors.black87),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Color(0xFF8B4513)),
-                  ],
-                ),
-              ),
-            ),
-
             const SizedBox(height: 24),
 
             _buildAppFeatureCard(
@@ -1264,42 +1048,6 @@ class _StudyViewState extends State<StudyView> with SingleTickerProviderStateMix
                     ),
                   ),
                 ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
-            InkWell(
-              onTap: () => context.go('/session/self-portraits'),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: isDark ? const Color(0xFF2E2018) : const Color(0xFFFFF3E0),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF8B4513).withOpacity(0.4)),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.face_retouching_natural_rounded, color: Color(0xFF8B4513), size: 28),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Sesión Aplicada: 20 Autorretratos en Dominio Público',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.5),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            'Aplica este método paso a paso con las 4 estaciones de aprendizaje y la Fórmula de las 4 Partes.',
-                            style: TextStyle(fontSize: 12.5, color: isDark ? Colors.white70 : Colors.black87),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Color(0xFF8B4513)),
-                  ],
-                ),
               ),
             ),
 
