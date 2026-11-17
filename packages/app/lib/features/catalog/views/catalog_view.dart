@@ -215,6 +215,69 @@ class CatalogView extends StatelessWidget {
                 ),
               ),
 
+              // Banner de la Sesión de Autorretratos en Dominio Público
+              InkWell(
+                onTap: () => context.go('/session/self-portraits'),
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF4A2311), Color(0xFF8B4513)],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.18),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.face_retouching_natural_rounded, size: 24, color: Colors.amberAccent),
+                      const SizedBox(width: 12),
+                      const Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '🎨 Sesión Especial: 20 Autorretratos en Dominio Público',
+                              style: TextStyle(
+                                fontSize: 13.5,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(height: 2),
+                            Text(
+                              'Obras 100% libres de derechos con guía de análisis Panofsky, Wölfflin y 4 estaciones.',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white70,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      FilledButton.tonal(
+                        style: FilledButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: const Color(0xFF4A2311),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          visualDensity: VisualDensity.compact,
+                        ),
+                        onPressed: () => context.go('/session/self-portraits'),
+                        child: const Text('Entrar a Sesión', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold)),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
               // Educational study & movements banner
               InkWell(
                 onTap: () => context.go('/study?tab=1'),
