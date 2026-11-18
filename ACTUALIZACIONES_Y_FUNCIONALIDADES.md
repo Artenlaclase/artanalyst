@@ -146,6 +146,20 @@ Este documento detalla el historial de cambios técnicos aplicados en el reposit
   * Se incrementó la proporción dedicada a la imagen de la obra (`flex: 6` frente a `flex: 4` de ficha técnica) y la relación de aspecto (`aspectRatio: 0.95` en móvil).
   * Ahora, al entrar al catálogo desde un celular, la obra de arte ocupa de inmediato el centro de la pantalla en alta resolución y con total claridad.
 
+### 1.15. Solución Definitiva a la Carga de Imágenes en Producción (Vercel, Políticas de Caché de Wikimedia y No-Referrer)
+* **Detección del Problema en Producción (`artanalyst.vercel.app`):**
+  * Al desplegar en la nube (Vercel), las 10 obras clásicas del catálogo inicial (*Rembrandt*, *Goya - 3 de mayo*, *Botticelli - Venus*, *Degas - Clase de danza*, *Cézanne - Jugadores de cartas*, *Van Gogh - Noche estrellada*, *Monet - Impresión*, *Hokusai - La gran ola*, *Munch - El grito* y *Klimt - El beso*) mostraban el recuadro marrón de respaldo con el icono de la paleta en lugar de su fotografía.
+* **Diagnóstico Técnico de las Causas:**
+  1. **Políticas de Miniaturas de Wikimedia Commons (`HTTP 400 Bad Request`):** Las entradas de `img-06` a `img-15` en `ArtworkRepository` poseían URLs antiguas con prefijos `/600px-` y `/1200px-`. La arquitectura moderna de Wikimedia Commons rechaza con código 400 (`not allowed by policy`) la generación de miniaturas con anchos no estandarizados.
+  2. **Bloqueo por Cabecera `Referer` en Navegadores Web:** Al cargar imágenes desde `https://artanalyst.vercel.app/`, el navegador enviaba el encabezado `Referer: https://artanalyst.vercel.app/`, provocando que los servidores CDN de Wikimedia bloquearan la petición por directiva anti-hotlink.
+  3. **Falta de Redundancia en `SmartArtworkImage`:** Si la URL de la miniatura fallaba, el componente saltaba directamente al contenedor decorativo sin intentar la imagen original de alta resolución.
+* **Soluciones Implementadas:**
+  1. **Auditoría y Resolución Canónica de URLs (API Wikimedia):** Se consultó la API oficial de Wikimedia Commons (`action=query&prop=imageinfo&iiurlwidth=960`) y se reemplazaron las URLs por miniaturas canónicas a `960px` alojadas en `thumb.wikimedia.org`.
+  2. **Script de Verificación Automatizada (`scripts/verify_fast.py`):** Se implementó una suite que prueba individualmente las 34 obras maestras del repositorio contra los servidores remotos, certificando un 100% de respuestas exitosas (`HTTP 200 OK`).
+  3. **Directiva `<meta name="referrer" content="no-referrer">`:** Se configuró en `packages/app/web/index.html` y `web/index.html` para suprimir la cabecera `Referer` en peticiones de medios externos, garantizando compatibilidad total en Vercel.
+  4. **Resiliencia con Doble URL (`fallbackUrl`) en `SmartArtworkImage`:** Se incorporó el parámetro `fallbackUrl` en el widget `SmartArtworkImage`, enlazado en `ArtworkCard` y en `SelfPortraitsSessionView`. Si la miniatura sufre lentitud o fallo temporal, el widget intenta automáticamente la URL secundaria antes de recurrir al placeholder.
+  5. **Despliegue Continuo a Producción:** Los cambios fueron integrados y subidos a la rama `master` de GitHub (`origin/master`), gatillando la actualización automática en Vercel.
+
 ---
 
 ## 2. Catálogo de Funcionalidades Implementadas
