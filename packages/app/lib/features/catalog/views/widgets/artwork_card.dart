@@ -40,6 +40,7 @@ class ArtworkCard extends StatelessWidget {
                     SmartArtworkImage(
                       artworkId: artwork.id,
                       imageUrl: image!.thumbnailUrl ?? image!.imageUrl,
+                      fallbackUrl: image!.imageUrl,
                       fit: BoxFit.cover,
                       cacheWidth: 600,
                       placeholderTitle: artwork.title,

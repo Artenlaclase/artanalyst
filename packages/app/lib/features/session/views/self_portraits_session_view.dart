@@ -729,7 +729,8 @@ class _SelfPortraitsSessionViewState extends State<SelfPortraitsSessionView>
                         height: 48,
                         child: SmartArtworkImage(
                           artworkId: art.id,
-                          imageUrl: img?.thumbnailUrl,
+                          imageUrl: img?.thumbnailUrl ?? img?.imageUrl,
+                          fallbackUrl: img?.imageUrl,
                           fit: BoxFit.cover,
                         ),
                       ),

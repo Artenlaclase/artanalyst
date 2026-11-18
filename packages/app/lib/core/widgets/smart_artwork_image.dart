@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 class SmartArtworkImage extends StatelessWidget {
   final String? artworkId;
   final String? imageUrl;
+  final String? fallbackUrl;
   final BoxFit fit;
   final int? cacheWidth;
   final String? placeholderTitle;
@@ -18,6 +19,7 @@ class SmartArtworkImage extends StatelessWidget {
     super.key,
     this.artworkId,
     this.imageUrl,
+    this.fallbackUrl,
     this.fit = BoxFit.cover,
     this.cacheWidth,
     this.placeholderTitle,
@@ -92,6 +94,10 @@ class SmartArtworkImage extends StatelessWidget {
       );
     }
 
+    return _buildNetworkImage(context, url, fallbackUrl);
+  }
+
+  Widget _buildNetworkImage(BuildContext context, String url, String? secondaryUrl) {
     return Image.network(
       url,
       fit: fit,
@@ -133,7 +139,12 @@ class SmartArtworkImage extends StatelessWidget {
           ),
         );
       },
-      errorBuilder: (context, error, stackTrace) => _buildFallback(context),
+      errorBuilder: (context, error, stackTrace) {
+        if (secondaryUrl != null && secondaryUrl.isNotEmpty && secondaryUrl != url) {
+          return _buildNetworkImage(context, secondaryUrl, null);
+        }
+        return _buildFallback(context);
+      },
     );
   }
 

@@ -1,0 +1,206 @@
+{
+  "sp01-durero-1500": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Albrecht_D%C3%BCrer_-_1500_self-portrait_%28High_resolution_and_detail%29.jpg/960px-Albrecht_D%C3%BCrer_-_1500_self-portrait_%28High_resolution_and_detail%29.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Albrecht_D%C3%BCrer_-_1500_self-portrait_%28High_resolution_and_detail%29.jpg/960px-Albrecht_D%C3%BCrer_-_1500_self-portrait_%28High_resolution_and_detail%29.jpg"
+  },
+  "sp02-parmigianino-1524": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Parmigianino_-_Self-portrait_in_a_Convex_Mirror_-_WGA17031.jpg/960px-Parmigianino_-_Self-portrait_in_a_Convex_Mirror_-_WGA17031.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Parmigianino_-_Self-portrait_in_a_Convex_Mirror_-_WGA17031.jpg/960px-Parmigianino_-_Self-portrait_in_a_Convex_Mirror_-_WGA17031.jpg"
+  },
+  "sp03-sofonisba-1556": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Self-Portait_at_the_Easel_%28Sofonisba_Anguissola%29-WUS09909.jpg/960px-Self-Portait_at_the_Easel_%28Sofonisba_Anguissola%29-WUS09909.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Self-Portait_at_the_Easel_%28Sofonisba_Anguissola%29-WUS09909.jpg/960px-Self-Portait_at_the_Easel_%28Sofonisba_Anguissola%29-WUS09909.jpg"
+  },
+  "sp04-leonardo-1512": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Leonardo_self.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Leonardo_self.jpg"
+  },
+  "sp05-tiziano-1567": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Titian_-_Self-Portrait_-_P000407_-_Museo_del_Prado.jpg/960px-Titian_-_Self-Portrait_-_P000407_-_Museo_del_Prado.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Titian_-_Self-Portrait_-_P000407_-_Museo_del_Prado.jpg/960px-Titian_-_Self-Portrait_-_P000407_-_Museo_del_Prado.jpg"
+  },
+  "sp06-rubens-1609": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Peter_Paul_Rubens_Peter_Paul_Rubens_-_The_Artist_and_His_First_Wife%2C_Isabella_Brant%2C_in_the_Honeysuckle_Bower.jpg/960px-Peter_Paul_Rubens_Peter_Paul_Rubens_-_The_Artist_and_His_First_Wife%2C_Isabella_Brant%2C_in_the_Honeysuckle_Bower.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Peter_Paul_Rubens_Peter_Paul_Rubens_-_The_Artist_and_His_First_Wife%2C_Isabella_Brant%2C_in_the_Honeysuckle_Bower.jpg/960px-Peter_Paul_Rubens_Peter_Paul_Rubens_-_The_Artist_and_His_First_Wife%2C_Isabella_Brant%2C_in_the_Honeysuckle_Bower.jpg"
+  },
+  "sp07-leyster-1630": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Judith_Leyster_-_Self-Portrait_-_Google_Art_Project.jpg/960px-Judith_Leyster_-_Self-Portrait_-_Google_Art_Project.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Judith_Leyster_-_Self-Portrait_-_Google_Art_Project.jpg/960px-Judith_Leyster_-_Self-Portrait_-_Google_Art_Project.jpg"
+  },
+  "sp08-artemisia-1638": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Self-portrait_as_the_Allegory_of_Painting_%28La_Pittura%29_-_Artemisia_Gentileschi.jpg/960px-Self-portrait_as_the_Allegory_of_Painting_%28La_Pittura%29_-_Artemisia_Gentileschi.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Self-portrait_as_the_Allegory_of_Painting_%28La_Pittura%29_-_Artemisia_Gentileschi.jpg/960px-Self-portrait_as_the_Allegory_of_Painting_%28La_Pittura%29_-_Artemisia_Gentileschi.jpg"
+  },
+  "sp09-velazquez-1656": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Las_Meninas_%28detail%29_by_Diego_Vel%C3%A1zquez.png/960px-Las_Meninas_%28detail%29_by_Diego_Vel%C3%A1zquez.png",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Las_Meninas_%28detail%29_by_Diego_Vel%C3%A1zquez.png/960px-Las_Meninas_%28detail%29_by_Diego_Vel%C3%A1zquez.png"
+  },
+  "sp10-rembrandt-1665": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Rembrandt_Self-portrait_%28Kenwood%29.jpg/960px-Rembrandt_Self-portrait_%28Kenwood%29.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Rembrandt_Self-portrait_%28Kenwood%29.jpg/960px-Rembrandt_Self-portrait_%28Kenwood%29.jpg"
+  },
+  "sp11-vigeelbrun-1782": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Self-portrait_in_a_Straw_Hat_by_Elisabeth-Louise_Vig%C3%A9e-Lebrun.jpg/960px-Self-portrait_in_a_Straw_Hat_by_Elisabeth-Louise_Vig%C3%A9e-Lebrun.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Self-portrait_in_a_Straw_Hat_by_Elisabeth-Louise_Vig%C3%A9e-Lebrun.jpg/960px-Self-portrait_in_a_Straw_Hat_by_Elisabeth-Louise_Vig%C3%A9e-Lebrun.jpg"
+  },
+  "sp12-goya-1795": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/85/Self-portrait_in_the_Studio_by_Francisco_de_Goya.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/8/85/Self-portrait_in_the_Studio_by_Francisco_de_Goya.jpg"
+  },
+  "sp13-courbet-1843": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Gustave_Courbet_-_Le_D%C3%A9sesp%C3%A9r%C3%A9_%281843%29.jpg/960px-Gustave_Courbet_-_Le_D%C3%A9sesp%C3%A9r%C3%A9_%281843%29.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Gustave_Courbet_-_Le_D%C3%A9sesp%C3%A9r%C3%A9_%281843%29.jpg/960px-Gustave_Courbet_-_Le_D%C3%A9sesp%C3%A9r%C3%A9_%281843%29.jpg"
+  },
+  "sp14-friedrich-1810": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Caspar_David_Friedrich_-_Selbstbildnis_%28ca._1810%29.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Caspar_David_Friedrich_-_Selbstbildnis_%28ca._1810%29.jpg"
+  },
+  "sp15-cezanne-1875": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Portrait_de_l%27artiste_au_fond_rose%2C_par_Paul_C%C3%A9zanne.jpg/960px-Portrait_de_l%27artiste_au_fond_rose%2C_par_Paul_C%C3%A9zanne.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Portrait_de_l%27artiste_au_fond_rose%2C_par_Paul_C%C3%A9zanne.jpg/960px-Portrait_de_l%27artiste_au_fond_rose%2C_par_Paul_C%C3%A9zanne.jpg"
+  },
+  "sp16-cassatt-1878": {
+    "img_status": 999,
+    "thumb_status": 200,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/af/Mary_Cassatt-Selfportrait.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/a/af/Mary_Cassatt-Selfportrait.jpg"
+  },
+  "sp17-monet-1886": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Autoportret_Claude_Monet.jpg/960px-Autoportret_Claude_Monet.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Autoportret_Claude_Monet.jpg/960px-Autoportret_Claude_Monet.jpg"
+  },
+  "sp18-vangogh-1889": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Vincent_van_Gogh_-_Self-Portrait_with_Bandaged_Ear_1889_-_Google_Art_Project.jpg/960px-Vincent_van_Gogh_-_Self-Portrait_with_Bandaged_Ear_1889_-_Google_Art_Project.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Vincent_van_Gogh_-_Self-Portrait_with_Bandaged_Ear_1889_-_Google_Art_Project.jpg/960px-Vincent_van_Gogh_-_Self-Portrait_with_Bandaged_Ear_1889_-_Google_Art_Project.jpg"
+  },
+  "sp19-gauguin-1893": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Paul_Gauguin_-_Self-Portrait_-_Google_Art_Project.jpg/960px-Paul_Gauguin_-_Self-Portrait_-_Google_Art_Project.jpg",
+    "thumbnailUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Paul_Gauguin_-_Self-Portrait_-_Google_Art_Project.jpg/960px-Paul_Gauguin_-_Self-Portrait_-_Google_Art_Project.jpg"
+  },
+  "sp20-schiele-1910": {
+    "img_status": 200,
+    "thumb_status": 999,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/96/Schiele_-_Selbstbildnis_mit_H%C3%A4nden_vor_der_Brust.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/9/96/Schiele_-_Selbstbildnis_mit_H%C3%A4nden_vor_der_Brust.jpg"
+  },
+  "a1000000-0000-0000-0000-000000000001": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "assets/images/van_gogh.jpg",
+    "thumbnailUrl": "assets/images/van_gogh.jpg"
+  },
+  "a2000000-0000-0000-0000-000000000002": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "assets/images/monet.jpg",
+    "thumbnailUrl": "assets/images/monet.jpg"
+  },
+  "a3000000-0000-0000-0000-000000000003": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "assets/images/vermeer.jpg",
+    "thumbnailUrl": "assets/images/vermeer.jpg"
+  },
+  "a5000000-0000-0000-0000-000000000005": {
+    "img_status": 200,
+    "thumb_status": 200,
+    "imageUrl": "assets/images/friedrich.jpg",
+    "thumbnailUrl": "assets/images/friedrich.jpg"
+  },
+  "a6000000-0000-0000-0000-000000000006": {
+    "img_status": 400,
+    "thumb_status": 400,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Rembrandt_van_Rijn_-_Self-Portrait_-_Google_Art_Project.jpg/1200px-Rembrandt_van_Rijn_-_Self-Portrait_-_Google_Art_Project.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Rembrandt_van_Rijn_-_Self-Portrait_-_Google_Art_Project.jpg/600px-Rembrandt_van_Rijn_-_Self-Portrait_-_Google_Art_Project.jpg"
+  },
+  "a7000000-0000-0000-0000-000000000007": {
+    "img_status": 400,
+    "thumb_status": 400,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/El_tres_de_mayo_de_1808_en_Madrid_%282%29.jpg/1200px-El_tres_de_mayo_de_1808_en_Madrid_%282%29.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/El_tres_de_mayo_de_1808_en_Madrid_%282%29.jpg/600px-El_tres_de_mayo_de_1808_en_Madrid_%282%29.jpg"
+  },
+  "a8000000-0000-0000-0000-000000000008": {
+    "img_status": 400,
+    "thumb_status": 400,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/1200px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/600px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg"
+  },
+  "a9000000-0000-0000-0000-000000000009": {
+    "img_status": 400,
+    "thumb_status": 400,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Edgar_Degas_-_The_Dance_Class_-_1987.47.1_-_Metropolitan_Museum_of_Art.jpg/1200px-Edgar_Degas_-_The_Dance_Class_-_1987.47.1_-_Metropolitan_Museum_of_Art.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Edgar_Degas_-_The_Dance_Class_-_1987.47.1_-_Metropolitan_Museum_of_Art.jpg/600px-Edgar_Degas_-_The_Dance_Class_-_1987.47.1_-_Metropolitan_Museum_of_Art.jpg"
+  },
+  "a1000000-0000-0000-0000-000000000010": {
+    "img_status": 400,
+    "thumb_status": 400,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Paul_C%C3%A9zanne%2C_1892-95%2C_Les_joueurs_de_carte_%28The_Card_Players%29%2C_60_x_73_cm%2C_oil_on_canvas%2C_Courtauld_Institute_of_Art%2C_London.jpg/1200px-Paul_C%C3%A9zanne%2C_1892-95%2C_Les_joueurs_de_carte_%28The_Card_Players%29%2C_60_x_73_cm%2C_oil_on_canvas%2C_Courtauld_Institute_of_Art%2C_London.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Paul_C%C3%A9zanne%2C_1892-95%2C_Les_joueurs_de_carte_%28The_Card_Players%29%2C_60_x_73_cm%2C_oil_on_canvas%2C_Courtauld_Institute_of_Art%2C_London.jpg/600px-Paul_C%C3%A9zanne%2C_1892-95%2C_Les_joueurs_de_carte_%28The_Card_Players%29%2C_60_x_73_cm%2C_oil_on_canvas%2C_Courtauld_Institute_of_Art%2C_London.jpg"
+  },
+  "a1100000-0000-0000-0000-000000000011": {
+    "img_status": 400,
+    "thumb_status": 400,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1200px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/600px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"
+  },
+  "a1200000-0000-0000-0000-000000000012": {
+    "img_status": 400,
+    "thumb_status": 400,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Monet_-_Impression%2C_Sunrise.jpg/1200px-Monet_-_Impression%2C_Sunrise.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Monet_-_Impression%2C_Sunrise.jpg/600px-Monet_-_Impression%2C_Sunrise.jpg"
+  },
+  "a1300000-0000-0000-0000-000000000013": {
+    "img_status": 400,
+    "thumb_status": 400,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Tsunami_by_hokusai_19th_century.jpg/1200px-Tsunami_by_hokusai_19th_century.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Tsunami_by_hokusai_19th_century.jpg/600px-Tsunami_by_hokusai_19th_century.jpg"
+  },
+  "a1400000-0000-0000-0000-000000000014": {
+    "img_status": 400,
+    "thumb_status": 400,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg/1200px-Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg/600px-Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg"
+  },
+  "a1500000-0000-0000-0000-000000000015": {
+    "img_status": 400,
+    "thumb_status": 400,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg/1200px-The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg",
+    "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg/600px-The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg"
+  }
+}
